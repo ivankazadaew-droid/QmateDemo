@@ -1,5 +1,17 @@
 class HomePage {
 
+    static WELCOME_HEADLINE_SELECTOR = {
+        "elementProperties": {
+            "viewName": "sap.ui.demo.cart.view.Welcome",
+            "metadata": "sap.m.Title",
+            "text": [
+                {
+                    "path": "i18n>welcomeHeadline"
+                }
+            ]
+        }
+    };
+
     static ADD_BUTTON_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Welcome",
@@ -45,6 +57,18 @@ class HomePage {
                 }
             }
         }
+    }
+
+    async open() {
+        await browser.url("/test-resources/sap/m/demokit/cart/webapp/index.html");
+    }
+
+    async waitForPageToLoad() {
+        await ui5.element.getDisplayed(
+            HomePage.WELCOME_HEADLINE_SELECTOR,
+            0,
+            { timeout: 10000}
+        );
     }
      
     async clickAddItemButton() {

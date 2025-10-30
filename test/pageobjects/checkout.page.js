@@ -1,5 +1,13 @@
 class CheckoutPage {
 
+    static ITEMS_LIST_SELECTOR = {
+        "elementProperties": {
+            "viewName": "sap.ui.demo.cart.view.Checkout",
+            "metadata": "sap.m.WizardStep",
+            "id": "*contentsStep"
+        }
+    }
+
     static STEP_2_BUTTON_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Checkout",
@@ -103,6 +111,14 @@ class CheckoutPage {
             "id": "*deliveryTypeStep-nextButton"
         }
     };
+
+    async waitForPageToLoad() {
+        await ui5.element.getDisplayed(
+            CheckoutPage.ITEMS_LIST_SELECTOR,
+            0,
+            { timeout: 10000}
+        );
+    }
      
     async clickStep2Button() {
         await ui5.userInteraction.click(CheckoutPage.STEP_2_BUTTON_SELECTOR);
