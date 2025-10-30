@@ -9,7 +9,7 @@ import OrderCompletedPage from '../pageobjects/orderCompleted.page.js';
 
 describe('Home Page tests', () => {
 
-    it.skip('Add any item', async () => {
+    it('Add any item', async () => {
 
         const cardHolderName = faker.person.fullName();
         let rawCardNumber = faker.finance.creditCardNumber(); 
@@ -25,6 +25,9 @@ describe('Home Page tests', () => {
         const zipCode = faker.location.zipCode('#####');
         const country = faker.location.country();
 
+        await HomePage.open();
+        await HomePage.waitForPageToLoad();
+
         // Add item
 
         await HomePage.clickAddItemButton();
@@ -33,6 +36,7 @@ describe('Home Page tests', () => {
 
         // Checkout
 
+        await CheckoutPage.waitForPageToLoad();
         await CheckoutPage.clickStep2Button();
         await CheckoutPage.clickStep3Button();
 
@@ -54,10 +58,13 @@ describe('Home Page tests', () => {
         await CheckoutPage.clickStep5Button();
         await CheckoutPage.clickOrderSummaryButton();
 
+        await OrderSummary.waitForPageToLoad();
         await OrderSummary.clickSubmitButton();
         await OrderSummary.clickConfirmationModalYesButton();
 
         // Assertion
+
+        await OrderCompletedPage.waitForPageToLoad();
 
         const successMessageText = await OrderCompletedPage.getSuccessMessageText();
         const expectedText = "Thank you for your!";
@@ -68,6 +75,8 @@ describe('Home Page tests', () => {
     it('Verify Confirmation modal is displayed when Out of Stoke product is selected', async () => {
 
         await allure.step('Add Out of Stock product to Cart', async () => {
+            await HomePage.open();
+            await HomePage.waitForPageToLoad();
             await HomePage.clickAddToCartButtonForProductWithStatus("Out of Stock");
 
             const isModalDisplayed = await HomePage.isOutOfStockConfirmationDialogDisplayed()
