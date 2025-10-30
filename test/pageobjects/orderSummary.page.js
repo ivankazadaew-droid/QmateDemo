@@ -1,5 +1,17 @@
 class OrderSummary {
 
+    static ITEMS_LIST_SELECTOR = {
+        "elementProperties": {
+            "viewName": "sap.ui.demo.cart.view.Checkout",
+            "metadata": "sap.m.ObjectListItem"
+        },
+        "ancestorProperties": {
+            "metadata": "sap.m.List",
+            "viewName": "sap.ui.demo.cart.view.Checkout",
+            "id": "*summaryEntryList"
+        }
+    };
+
     static SUBMIT_BUTTON_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Checkout",
@@ -14,6 +26,14 @@ class OrderSummary {
             "text": "Yes"
         }
     };
+
+    async waitForPageToLoad() {
+        await ui5.element.getDisplayed(
+            OrderSummary.ITEMS_LIST_SELECTOR,
+            0,
+            { timeout: 10000}
+        );
+    }
      
     async clickSubmitButton() {
         await ui5.userInteraction.click(OrderSummary.SUBMIT_BUTTON_SELECTOR);

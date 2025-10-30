@@ -1,5 +1,3 @@
-import QmateService from "@sap_oss/wdio-qmate-service";
-
 export const config = {
     //
     // ====================
@@ -23,7 +21,7 @@ export const config = {
     // of the config file unless it's absolute.
     //
     specs: [
-        './test/specs/homePage.spec.js'
+        './test/features/*.feature'
     ],
     // Patterns to exclude.
     exclude: [
@@ -111,7 +109,7 @@ export const config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: [[QmateService]],
+    services: [['@sap_oss/wdio-qmate-service']],
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -119,7 +117,14 @@ export const config = {
     //
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
-    framework: 'mocha',
+    framework: 'cucumber',
+
+    cucumberOpts: {
+        require: ['./test/steps/*.js'],
+        format: ['pretty'],
+        tagExpression: '',
+        timeout: 60000,
+    },
     
     //
     // The number of times to retry the entire specfile when it fails as a whole
@@ -199,9 +204,8 @@ export const config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {object}         browser      instance of created browser/device session
      */
-    before: async (capabilities, specs) => {
-        await browser.url('/test-resources/sap/m/demokit/cart/webapp/index.html'); 
-    },
+    // before: async (capabilities, specs) => {
+    // },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {string} commandName hook command name
