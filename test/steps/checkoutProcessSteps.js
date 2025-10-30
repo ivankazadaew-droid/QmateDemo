@@ -1,5 +1,6 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import { faker } from '@faker-js/faker';
+import allure from '@wdio/allure-reporter';
 
 import HomePage from '../pageobjects/home.page.js';
 import CheckoutPage from '../pageobjects/checkout.page.js';
@@ -41,13 +42,27 @@ When('the user fills in card details', async function () {
 
   await CheckoutPage.clickStep3Button();
   await takeScreenshotAndAttach();
+
+  await allure.step('Input cardholder name', async () => {
+    await CheckoutPage.inputCardHolderName(cardHolderName);
+    await takeScreenshotAndAttach();
+  });
   
-  await CheckoutPage.inputCardHolderName(cardHolderName);
-  await CheckoutPage.inputCardNumber(cardNumber);
-  await CheckoutPage.inputSecurityCode(securityCode);
-  await CheckoutPage.inputExpirationDate(expirationDate);
-  await common.userInteraction.pressEnter();
-  await takeScreenshotAndAttach();
+  await allure.step('Input card number', async () => {
+    await CheckoutPage.inputCardNumber(cardNumber)
+    await takeScreenshotAndAttach();
+  });
+  
+  await allure.step('Input security code', async () => {
+    await CheckoutPage.inputSecurityCode(securityCode);
+    await takeScreenshotAndAttach();
+  });
+
+  await allure.step('Input expiration date', async () => {
+     await CheckoutPage.inputExpirationDate(expirationDate);
+    await common.userInteraction.pressEnter();
+    await takeScreenshotAndAttach();
+  });
 });
 
 When('the user fills in invoice address details', async function () {
