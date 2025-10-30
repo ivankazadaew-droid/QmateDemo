@@ -1,3 +1,5 @@
+import { parseHtmlToText } from '../utils/htmlParser.util.js';
+
 class OrderCompleted {
 
     static PAGE_CONTENT_CONTAINER_SELECTOR = {
@@ -24,11 +26,13 @@ class OrderCompleted {
     }
      
     async getSuccessMessageText() {
-        return await ui5.element.getPropertyValue(
-            OrderCompleted.SUCCESS_MESSAGE_SELECTOR, 
-            "htmlText",
-            0,
-            { timeout: 30000 }
+        return await parseHtmlToText(
+            await ui5.element.getPropertyValue(
+                OrderCompleted.SUCCESS_MESSAGE_SELECTOR, 
+                "htmlText",
+                0,
+                { timeout: 30000 }
+            )
         );
     }
 }

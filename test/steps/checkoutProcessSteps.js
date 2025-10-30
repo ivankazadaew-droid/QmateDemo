@@ -1,12 +1,12 @@
 import { Given, When, Then } from '@cucumber/cucumber';
 import { faker } from '@faker-js/faker';
 import allure from '@wdio/allure-reporter';
+import { takeScreenshotAndAttach } from '../utils/allure.utils.js';
 
 import HomePage from '../pageobjects/home.page.js';
 import CheckoutPage from '../pageobjects/checkout.page.js';
 import OrderSummary from '../pageobjects/orderSummary.page.js';
 import OrderCompletedPage from '../pageobjects/orderCompleted.page.js';
-import { takeScreenshotAndAttach } from '../utils/allure.utils.js';
 
 Given('the user is on the home page', async function () {
   await HomePage.open();
