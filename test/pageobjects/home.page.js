@@ -42,9 +42,46 @@ class HomePage {
         "ancestorProperties": {
             "metadata": "sap.m.Dialog"
         }
-    }
+    };
 
-    getProductCartButtonSelectorByProductStatus(productStatus) {
+    static CATEGORIES_LIST_SELECTOR = {
+        "elementProperties": {
+            "viewName": "sap.ui.demo.cart.view.Home",
+            "metadata": "sap.m.StandardListItem"
+        }
+    };
+
+    static PRODUCT_LIST_SELECTOR = {
+        "elementProperties": {
+            "viewName": "sap.ui.demo.cart.view.Category",
+            "metadata": "sap.m.ObjectListItem"
+        }
+    };
+
+    static PRODUCT_STATUS_SELECTOR = {
+        "elementProperties": {
+            "viewName": "sap.ui.demo.cart.view.Category",
+            "metadata": "sap.m.ObjectStatus",
+        }
+    };
+
+    static SEARCH_FIELD_SELECTOR = {
+        "elementProperties": {
+            "viewName": "sap.ui.demo.cart.view.Home",
+            "metadata": "sap.m.SearchField",
+            "id": "*searchField"
+        }    
+    };
+
+    static FILTER_BUTTON_SELECTOR = {
+        "elementProperties": {
+            "viewName": "sap.ui.demo.cart.view.Category",
+            "metadata": "sap.m.Button",
+            "id": "*masterListFilterButton"
+        }
+    };
+
+    _getProductCartButtonSelectorByProductStatus(productStatus) {
         return {
             "elementProperties": {
                 "metadata": "sap.m.Button"
@@ -57,7 +94,41 @@ class HomePage {
                 }
             }
         }
-    }
+    };
+
+    _getCategorySelectorByName(categoryName) {
+        return {
+            "elementProperties": {
+                "viewName": "sap.ui.demo.cart.view.Home",
+                "metadata": "sap.m.StandardListItem",
+                "title": categoryName
+            }
+        }
+    };
+
+    _getFilterTypeSelectorByName(filterType) {
+        return {
+            "elementProperties": {
+                "viewName": "sap.ui.demo.cart.view.Category",
+                "metadata": "sap.m.StandardListItem",
+                "title": `${filterType}`
+            }
+        }
+    };
+
+    _getFilterOptionSelectorByName(filterOption) {
+        return {
+            "elementProperties": {
+                "viewName": "sap.ui.demo.cart.view.Category",
+                "metadata": "sap.m.CheckBox"
+            },
+            "ancestorProperties": {
+                "viewName": "sap.ui.demo.cart.view.Category",
+                "metadata": "sap.m.StandardListItem",
+                "title": filterOption
+            }
+        }
+    };
 
     async open() {
         await browser.url("/test-resources/sap/m/demokit/cart/webapp/index.html");
@@ -84,7 +155,7 @@ class HomePage {
     }
 
     async clickAddToCartButtonForProductWithStatus(status) {
-        await ui5.userInteraction.click(this.getProductCartButtonSelectorByProductStatus(status));
+        await ui5.userInteraction.click(this._getProductCartButtonSelectorByProductStatus(status));
     }
 
     async isOutOfStockConfirmationDialogDisplayed() {
@@ -95,6 +166,55 @@ class HomePage {
             { timeout: 10000 }
         );
     }
+
+    async getAllCategoryTitles() {
+        let categoriesElements = await ui5.element.getAllDisplayed(HomePage.CATEGORIES_LIST_SELECTOR);
+        let titlePromises = categoriesElements.map(async(element) => {
+            return await ui5.control.getProperty(element, "title");
+        });
+        return await Promise.all(titlePromises);
+    }
+
+    async getAllProductTitles() {
+        let productElements = await ui5.element.getAllDisplayed(HomePage.PRODUCT_LIST_SELECTOR);
+        let titlePromises = productElements.map(async(element) => {
+            return await ui5.control.getProperty(element, "title");
+        });
+        return await Promise.all(titlePromises);
+    }
+
+    async getAllProductStatuses() {
+        let statusElements = await ui5.element.getAllDisplayed(HomePage.PRODUCT_STATUS_SELECTOR);
+        let statusPromises = statusElements.map(async(element) => {
+            return await ui5.control.getProperty(element, "text");
+        });
+        return await Promise.all(statusPromises);
+    }
+
+    async searchForProduct(productName) {
+        await ui5.userInteraction.searchFor(HomePage.SEARCH_FIELD_SELECTOR, productName, 0, 5000, false);
+    }
+
+    async selectCategory(categoryName) {
+        await ui5.userInteraction.click(this._getCategorySelectorByName(categoryName));
+    }
+
+    async clickFilterButton() {
+        await ui5.userInteraction.click(HomePage.FILTER_BUTTON_SELECTOR);
+    }
+
+    async selectFilter(filterName) {
+        await ui5.userInteraction.clickListItem(this._getFilterTypeSelectorByName(filterName));
+    }
+
+    async selectFilterOption(filterOptionName) {
+        await ui5.userInteraction.check(this._getFilterOptionSelectorByName(filterOptionName));
+    }
+
+    async applyFiltering() {
+        await ui5.confirmationDialog.clickOk();
+    }
 }
+
 
 export default new HomePage();

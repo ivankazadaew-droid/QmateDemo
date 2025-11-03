@@ -40,7 +40,7 @@ class OrderSummary {
     }
 
     async clickConfirmationModalYesButton() {
-        await ui5.userInteraction.click(OrderSummary.CONFIRMATION_MODAL_YES_BUTTON);
+        await ui5.confirmationDialog.clickYes();
     }
 }
 

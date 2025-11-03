@@ -1,5 +1,3 @@
-import QmateService from "@sap_oss/wdio-qmate-service";
-
 export const config = {
     //
     // ====================
@@ -111,7 +109,7 @@ export const config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: [[QmateService]],
+    services: [['@sap_oss/wdio-qmate-service']],
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -199,9 +197,8 @@ export const config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {object}         browser      instance of created browser/device session
      */
-    before: async (capabilities, specs) => {
-        await browser.url('/test-resources/sap/m/demokit/cart/webapp/index.html'); 
-    },
+    // before: async (capabilities, specs) => {
+    // },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {string} commandName hook command name

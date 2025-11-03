@@ -67,7 +67,7 @@ describe('Home Page tests', () => {
         await OrderCompletedPage.waitForPageToLoad();
 
         const successMessageText = await OrderCompletedPage.getSuccessMessageText();
-        const expectedText = "Thank you for your!";
+        const expectedText = "Thank you for your order!";
 
         await common.assertion.expectToContain(successMessageText, expectedText);
     });
@@ -85,5 +85,61 @@ describe('Home Page tests', () => {
 
             await takeScreenshotAndAttach();
         });
+    });
+
+    it('Verify categories list is equal expected', async () => {
+        await HomePage.open();
+        await HomePage.waitForPageToLoad();
+
+        const expectedCategories = [
+            "Accessories",
+            "Computer System Accessories",
+            "Desktop Computers",
+            "Flat Screen TVs",
+            "Flat Screens",
+            "Graphics Card",
+            "Keyboards",
+            "Laptops",
+            "Mice",
+            "Printers",
+            "Scanners",
+            "Servers",
+            "Smartphones and Tablets",
+            "Software",
+            "Speakers",
+            "Telecommunication",
+        ];
+
+        const actualCategories = await HomePage.getAllCategoryTitles();
+
+        await common.assertion.expectEqual(actualCategories, expectedCategories); 
+    });
+
+    it.skip('Verify product can be found via search bar', async () => {
+        await HomePage.open();
+        await HomePage.waitForPageToLoad();
+        
+        await HomePage.searchForProduct("Screen clean");
+        
+        const actualProducts = await HomePage.getAllProductTitles();
+
+        await common.assertion.expectEqual(actualProducts.length, 1);
+        await common.assertion.expectEqual(actualProducts[0], "Screen clean");
+    });
+
+    it('Verify products can be filtered by availability', async () => {
+        await HomePage.open();
+        await HomePage.waitForPageToLoad();
+        
+        await HomePage.selectCategory("Accessories");
+        await HomePage.clickFilterButton();
+        await HomePage.selectFilter("Availability");
+        await HomePage.selectFilterOption("Available");
+        await HomePage.applyFiltering();
+
+        let actualStatusesSet = new Set(await HomePage.getAllProductStatuses());
+
+        await common.assertion.expectEqual(actualStatusesSet.size, 1);
+        await common.assertion.expectTrue(actualStatusesSet.has("Available"));
     });
 });
