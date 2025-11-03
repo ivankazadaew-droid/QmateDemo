@@ -114,9 +114,8 @@ class CheckoutPage {
 
     async waitForPageToLoad() {
         await ui5.element.getDisplayed(
-            CheckoutPage.ITEMS_LIST_SELECTOR,
-            0,
-            { timeout: 10000}
+            { ...CheckoutPage.ITEMS_LIST_SELECTOR, timeout: 10000 },
+            0
         );
     }
      
@@ -136,35 +135,35 @@ class CheckoutPage {
         await ui5.userInteraction.click(CheckoutPage.STEP_5_BUTTON_SELECTOR);
     }
 
-    async inputCardHolderName(name) {
+    async inputCardHolderName(name: string) {
         await ui5.userInteraction.fill(CheckoutPage.CARD_HOLDER_NAME_INPUT_SELECTOR, name);
     }
 
-    async inputCardNumber(number) {
+    async inputCardNumber(number: string) {
         await ui5.userInteraction.clearAndFill(CheckoutPage.CARD_NUMBER_INPUT_SELECTOR, number);
     }
 
-    async inputSecurityCode(code) {
+    async inputSecurityCode(code: string) {
         await ui5.userInteraction.clearAndFill(CheckoutPage.SECURITY_CODE_INPUT_SELECTOR, code);
     } 
 
-    async inputExpirationDate(date) {
+    async inputExpirationDate(date: string) {
         await ui5.userInteraction.clearAndFill(CheckoutPage.EXPIRATION_DATE_INPUT_SELECTOR, date);
     }
 
-    async inputAddress(address) {
+    async inputAddress(address: string) {
         await ui5.userInteraction.fill(CheckoutPage.ADDRESS_INPUT_SELECTOR, address);
     }
 
-    async inputCity(city) {
+    async inputCity(city: string) {
         await ui5.userInteraction.fill(CheckoutPage.CITY_INPUT_SELECTOR, city);
     }
 
-    async inputZipCode(zipCode) {
+    async inputZipCode(zipCode: string) {
         await ui5.userInteraction.fill(CheckoutPage.ZIP_CODE_INPUT_SELECTOR, zipCode);
     }
 
-    async inputCountry(country) {
+    async inputCountry(country: string) {
         await ui5.userInteraction.fill(CheckoutPage.COUNTRY_INPUT_SELECTOR, country);
     }
 

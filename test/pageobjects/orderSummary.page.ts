@@ -31,7 +31,7 @@ class OrderSummary {
         await ui5.element.getDisplayed(
             OrderSummary.ITEMS_LIST_SELECTOR,
             0,
-            { timeout: 10000}
+            10000
         );
     }
      

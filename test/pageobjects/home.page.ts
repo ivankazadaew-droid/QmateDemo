@@ -81,7 +81,7 @@ class HomePage {
         }
     };
 
-    _getProductCartButtonSelectorByProductStatus(productStatus) {
+    _getProductCartButtonSelectorByProductStatus(productStatus: string) {
         return {
             "elementProperties": {
                 "metadata": "sap.m.Button"
@@ -96,7 +96,7 @@ class HomePage {
         }
     };
 
-    _getCategorySelectorByName(categoryName) {
+    _getCategorySelectorByName(categoryName: string) {
         return {
             "elementProperties": {
                 "viewName": "sap.ui.demo.cart.view.Home",
@@ -106,7 +106,7 @@ class HomePage {
         }
     };
 
-    _getFilterTypeSelectorByName(filterType) {
+    _getFilterTypeSelectorByName(filterType: string) {
         return {
             "elementProperties": {
                 "viewName": "sap.ui.demo.cart.view.Category",
@@ -116,7 +116,7 @@ class HomePage {
         }
     };
 
-    _getFilterOptionSelectorByName(filterOption) {
+    _getFilterOptionSelectorByName(filterOption: string) {
         return {
             "elementProperties": {
                 "viewName": "sap.ui.demo.cart.view.Category",
@@ -138,7 +138,7 @@ class HomePage {
         await ui5.element.getDisplayed(
             HomePage.WELCOME_HEADLINE_SELECTOR,
             0,
-            { timeout: 10000}
+            10000
         );
     }
      
@@ -154,7 +154,7 @@ class HomePage {
         await ui5.userInteraction.click(HomePage.PROCEED_CART_BUTTON_SELECTOR);
     }
 
-    async clickAddToCartButtonForProductWithStatus(status) {
+    async clickAddToCartButtonForProductWithStatus(status: string) {
         await ui5.userInteraction.click(this._getProductCartButtonSelectorByProductStatus(status));
     }
 
@@ -163,39 +163,47 @@ class HomePage {
             HomePage.OUT_OF_STOCK_CONFIRMATION_DIALOG, 
             "visible",
             0,
-            { timeout: 10000 }
+            10000
         );
     }
 
     async getAllCategoryTitles() {
-        let categoriesElements = await ui5.element.getAllDisplayed(HomePage.CATEGORIES_LIST_SELECTOR);
-        let titlePromises = categoriesElements.map(async(element) => {
-            return await ui5.control.getProperty(element, "title");
+        let categoriesElements = await ui5.element.getAllDisplayed(
+            HomePage.CATEGORIES_LIST_SELECTOR
+        ) as unknown as Element[];
+
+        let titlePromises = categoriesElements.map((element) => { 
+            return ui5.control.getProperty(element as unknown as WebdriverIO.Element, "title"); 
         });
-        return await Promise.all(titlePromises);
+        
+        return await Promise.all(titlePromises); 
     }
 
     async getAllProductTitles() {
-        let productElements = await ui5.element.getAllDisplayed(HomePage.PRODUCT_LIST_SELECTOR);
+        let productElements = await ui5.element.getAllDisplayed(
+            HomePage.PRODUCT_LIST_SELECTOR
+        ) as unknown as Element[];
         let titlePromises = productElements.map(async(element) => {
-            return await ui5.control.getProperty(element, "title");
+            return ui5.control.getProperty(element as unknown as WebdriverIO.Element, "title");
         });
         return await Promise.all(titlePromises);
     }
 
     async getAllProductStatuses() {
-        let statusElements = await ui5.element.getAllDisplayed(HomePage.PRODUCT_STATUS_SELECTOR);
+        let statusElements = await ui5.element.getAllDisplayed(
+            HomePage.PRODUCT_STATUS_SELECTOR
+        ) as unknown as Element[];
         let statusPromises = statusElements.map(async(element) => {
-            return await ui5.control.getProperty(element, "text");
+            return ui5.control.getProperty(element as unknown as WebdriverIO.Element, "text");
         });
         return await Promise.all(statusPromises);
     }
 
-    async searchForProduct(productName) {
-        await ui5.userInteraction.searchFor(HomePage.SEARCH_FIELD_SELECTOR, productName, 0, 5000, false);
+    async searchForProduct(productName: string) {
+        await ui5.userInteraction.searchFor(HomePage.SEARCH_FIELD_SELECTOR, productName);
     }
 
-    async selectCategory(categoryName) {
+    async selectCategory(categoryName: string) {
         await ui5.userInteraction.click(this._getCategorySelectorByName(categoryName));
     }
 
@@ -203,11 +211,11 @@ class HomePage {
         await ui5.userInteraction.click(HomePage.FILTER_BUTTON_SELECTOR);
     }
 
-    async selectFilter(filterName) {
+    async selectFilter(filterName: string) {
         await ui5.userInteraction.clickListItem(this._getFilterTypeSelectorByName(filterName));
     }
 
-    async selectFilterOption(filterOptionName) {
+    async selectFilterOption(filterOptionName: string) {
         await ui5.userInteraction.check(this._getFilterOptionSelectorByName(filterOptionName));
     }
 
@@ -215,6 +223,5 @@ class HomePage {
         await ui5.confirmationDialog.clickOk();
     }
 }
-
 
 export default new HomePage();

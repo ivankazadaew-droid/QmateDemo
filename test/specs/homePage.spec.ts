@@ -1,3 +1,5 @@
+/// <reference types="mocha" />
+
 import { faker } from '@faker-js/faker';
 import allure from '@wdio/allure-reporter';
 import { takeScreenshotAndAttach } from '../utils/allure.utils.js'
@@ -28,13 +30,9 @@ describe('Home Page tests', () => {
         await HomePage.open();
         await HomePage.waitForPageToLoad();
 
-        // Add item
-
         await HomePage.clickAddItemButton();
         await HomePage.clickCartButton();
         await HomePage.clickProceedCartButton();
-
-        // Checkout
 
         await CheckoutPage.waitForPageToLoad();
         await CheckoutPage.clickStep2Button();
@@ -61,8 +59,6 @@ describe('Home Page tests', () => {
         await OrderSummary.waitForPageToLoad();
         await OrderSummary.clickSubmitButton();
         await OrderSummary.clickConfirmationModalYesButton();
-
-        // Assertion
 
         await OrderCompletedPage.waitForPageToLoad();
 

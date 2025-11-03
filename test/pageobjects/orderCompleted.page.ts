@@ -19,7 +19,7 @@ class OrderCompleted {
         await ui5.element.getDisplayed(
             OrderCompleted.PAGE_CONTENT_CONTAINER_SELECTOR,
             0,
-            { timeout: 10000}
+            10000
         );
     }
      
@@ -28,7 +28,7 @@ class OrderCompleted {
             OrderCompleted.SUCCESS_MESSAGE_SELECTOR, 
             "htmlText",
             0,
-            { timeout: 30000 }
+            30000
         );
     }
 }

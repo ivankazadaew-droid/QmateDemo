@@ -1,10 +1,11 @@
-export const config = {
+export const config: WebdriverIO.Config = {
     //
     // ====================
     // Runner Configuration
     // ====================
     // WebdriverIO supports running e2e tests as well as unit and component tests.
     runner: 'local',
+    
     //
     // ==================
     // Specify Test Files
@@ -21,7 +22,7 @@ export const config = {
     // of the config file unless it's absolute.
     //
     specs: [
-        './test/specs/homePage.spec.js'
+        './test/specs/**/*.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -109,7 +110,7 @@ export const config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: [['@sap_oss/wdio-qmate-service']],
+    services: ['@sap_oss/wdio-qmate-service'],
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -197,7 +198,7 @@ export const config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {object}         browser      instance of created browser/device session
      */
-    // before: async (capabilities, specs) => {
+    // before: function (capabilities, specs) {
     // },
     /**
      * Runs before a WebdriverIO command gets executed.
@@ -239,12 +240,11 @@ export const config = {
      * @param {boolean} result.passed    true if test has passed, otherwise false
      * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
-    afterTest: async function(test, context, { error, result, duration, passed, retries }) {
+    afterTest: async function(passed) {
         if (!passed) {
             await browser.takeScreenshot();
         }
     },
-
 
     /**
      * Hook that gets executed after the suite has ended
