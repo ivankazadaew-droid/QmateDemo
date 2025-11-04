@@ -1,4 +1,4 @@
-class HomePage {
+class HomePage extends BasePage {
 
     static WELCOME_HEADLINE_SELECTOR = {
         "elementProperties": {

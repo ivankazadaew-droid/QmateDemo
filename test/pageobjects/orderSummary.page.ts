@@ -1,4 +1,4 @@
-class OrderSummary {
+class OrderSummary extends BasePage {
 
     static ITEMS_LIST_SELECTOR = {
         "elementProperties": {

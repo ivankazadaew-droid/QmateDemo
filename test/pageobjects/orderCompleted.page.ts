@@ -1,4 +1,4 @@
-class OrderCompleted {
+class OrderCompleted extends BasePage {
 
     static PAGE_CONTENT_CONTAINER_SELECTOR = {
         "elementProperties": {
