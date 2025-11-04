@@ -113,7 +113,7 @@ class HomePage extends BasePage {
             "elementProperties": {
                 "viewName": "sap.ui.demo.cart.view.Category",
                 "metadata": "sap.m.StandardListItem",
-                "title": `${filterType}`
+                "title": filterType
             }
         }
     };
