@@ -1,6 +1,6 @@
 class OrderCompleted extends BasePage {
 
-    static PAGE_CONTENT_CONTAINER_SELECTOR = {
+    static readonly PAGE_CONTENT_CONTAINER_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.OrderCompleted",
             "metadata": "sap.m.Page",
@@ -8,7 +8,7 @@ class OrderCompleted extends BasePage {
         }
     };
 
-    static SUCCESS_MESSAGE_SELECTOR = {
+    static readonly SUCCESS_MESSAGE_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.OrderCompleted",
             "metadata": "sap.m.FormattedText"

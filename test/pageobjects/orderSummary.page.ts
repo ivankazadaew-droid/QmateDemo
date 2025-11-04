@@ -1,6 +1,6 @@
 class OrderSummary extends BasePage {
 
-    static ITEMS_LIST_SELECTOR = {
+    static readonly ITEMS_LIST_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Checkout",
             "metadata": "sap.m.ObjectListItem"
@@ -12,7 +12,7 @@ class OrderSummary extends BasePage {
         }
     };
 
-    static SUBMIT_BUTTON_SELECTOR = {
+    static readonly SUBMIT_BUTTON_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Checkout",
             "metadata": "sap.m.Button",
@@ -20,7 +20,7 @@ class OrderSummary extends BasePage {
         }
     };
 
-    static CONFIRMATION_MODAL_YES_BUTTON = {
+    static readonly CONFIRMATION_MODAL_YES_BUTTON = {
         "elementProperties": {
             "metadata": "sap.m.Button",
             "text": "Yes"

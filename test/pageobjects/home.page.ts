@@ -1,6 +1,8 @@
 class HomePage extends BasePage {
 
-    static WELCOME_HEADLINE_SELECTOR = {
+    static readonly URL = "/test-resources/sap/m/demokit/cart/webapp/index.html";
+
+    static readonly WELCOME_HEADLINE_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Welcome",
             "metadata": "sap.m.Title",
@@ -12,7 +14,7 @@ class HomePage extends BasePage {
         }
     };
 
-    static ADD_BUTTON_SELECTOR = {
+    static readonly ADD_BUTTON_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Welcome",
             "metadata": "sap.m.Button",
@@ -20,14 +22,14 @@ class HomePage extends BasePage {
         }
     };
 
-    static CART_BUTTON_SELECTOR = {
+    static readonly CART_BUTTON_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Welcome",
             "metadata": "sap.m.ToggleButton"
         }
     };
 
-    static PROCEED_CART_BUTTON_SELECTOR = {
+    static readonly PROCEED_CART_BUTTON_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Cart",
             "metadata": "sap.m.Button",
@@ -35,7 +37,7 @@ class HomePage extends BasePage {
         }
     };
 
-    static OUT_OF_STOCK_CONFIRMATION_DIALOG = {
+    static readonly OUT_OF_STOCK_CONFIRMATION_DIALOG = {
         "elementProperties": {
             "metadata": "sap.m.Bar"
         },
@@ -44,28 +46,28 @@ class HomePage extends BasePage {
         }
     };
 
-    static CATEGORIES_LIST_SELECTOR = {
+    static readonly CATEGORIES_LIST_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Home",
             "metadata": "sap.m.StandardListItem"
         }
     };
 
-    static PRODUCT_LIST_SELECTOR = {
+    static readonly PRODUCT_LIST_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Category",
             "metadata": "sap.m.ObjectListItem"
         }
     };
 
-    static PRODUCT_STATUS_SELECTOR = {
+    static readonly PRODUCT_STATUS_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Category",
             "metadata": "sap.m.ObjectStatus",
         }
     };
 
-    static SEARCH_FIELD_SELECTOR = {
+    static readonly SEARCH_FIELD_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Home",
             "metadata": "sap.m.SearchField",
@@ -73,7 +75,7 @@ class HomePage extends BasePage {
         }    
     };
 
-    static FILTER_BUTTON_SELECTOR = {
+    static readonly FILTER_BUTTON_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Category",
             "metadata": "sap.m.Button",
@@ -131,7 +133,7 @@ class HomePage extends BasePage {
     };
 
     async open() {
-        await browser.url("/test-resources/sap/m/demokit/cart/webapp/index.html");
+        await browser.url(HomePage.URL);
     }
 
     async waitForPageToLoad() {

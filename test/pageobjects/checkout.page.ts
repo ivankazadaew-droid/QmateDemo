@@ -1,6 +1,6 @@
 class CheckoutPage extends BasePage {
 
-    static ITEMS_LIST_SELECTOR = {
+    static readonly ITEMS_LIST_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Checkout",
             "metadata": "sap.m.WizardStep",
@@ -8,7 +8,7 @@ class CheckoutPage extends BasePage {
         }
     }
 
-    static STEP_2_BUTTON_SELECTOR = {
+    static readonly STEP_2_BUTTON_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Checkout",
             "metadata": "sap.m.Button",
@@ -16,7 +16,7 @@ class CheckoutPage extends BasePage {
         }
     };
 
-    static STEP_3_BUTTON_SELECTOR = {
+    static readonly STEP_3_BUTTON_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Checkout",
             "metadata": "sap.m.Button",
@@ -24,7 +24,7 @@ class CheckoutPage extends BasePage {
         }
     };
 
-    static STEP_4_BUTTON_SELECTOR = {
+    static readonly STEP_4_BUTTON_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Checkout",
             "metadata": "sap.m.Button",
@@ -32,7 +32,7 @@ class CheckoutPage extends BasePage {
         }
     };
 
-    static STEP_5_BUTTON_SELECTOR = {
+    static readonly STEP_5_BUTTON_SELECTOR = {
             "elementProperties": {
                 "viewName": "sap.ui.demo.cart.view.Checkout",
                 "metadata": "sap.m.Button",
@@ -40,7 +40,7 @@ class CheckoutPage extends BasePage {
             }
         };
 
-    static CARD_HOLDER_NAME_INPUT_SELECTOR = {
+    static readonly CARD_HOLDER_NAME_INPUT_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Checkout",
             "metadata": "sap.m.Input",
@@ -48,7 +48,7 @@ class CheckoutPage extends BasePage {
         }
     };
 
-    static CARD_NUMBER_INPUT_SELECTOR = {
+    static readonly CARD_NUMBER_INPUT_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Checkout",
             "metadata": "sap.m.MaskInput",
@@ -56,7 +56,7 @@ class CheckoutPage extends BasePage {
         }
     };
 
-    static SECURITY_CODE_INPUT_SELECTOR = {
+    static readonly SECURITY_CODE_INPUT_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Checkout",
             "metadata": "sap.m.MaskInput",
@@ -64,7 +64,7 @@ class CheckoutPage extends BasePage {
         }
     };
 
-    static EXPIRATION_DATE_INPUT_SELECTOR = {
+    static readonly EXPIRATION_DATE_INPUT_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Checkout",
             "metadata": "sap.m.DatePicker",
@@ -72,7 +72,7 @@ class CheckoutPage extends BasePage {
         }
     };
 
-    static ADDRESS_INPUT_SELECTOR = {
+    static readonly ADDRESS_INPUT_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Checkout",
             "metadata": "sap.m.Input",
@@ -80,7 +80,7 @@ class CheckoutPage extends BasePage {
         }
     };
 
-    static CITY_INPUT_SELECTOR = {
+    static readonly CITY_INPUT_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Checkout",
             "metadata": "sap.m.Input",
@@ -88,7 +88,7 @@ class CheckoutPage extends BasePage {
         }
     };
 
-    static ZIP_CODE_INPUT_SELECTOR = {
+    static readonly ZIP_CODE_INPUT_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Checkout",
             "metadata": "sap.m.Input",
@@ -96,7 +96,7 @@ class CheckoutPage extends BasePage {
         }
     };
 
-    static COUNTRY_INPUT_SELECTOR = {
+    static readonly COUNTRY_INPUT_SELECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Checkout",
             "metadata": "sap.m.Input",
@@ -104,7 +104,7 @@ class CheckoutPage extends BasePage {
         }
     };
 
-    static ORDER_SUMMARY_BUTTON_SLECTOR = {
+    static readonly ORDER_SUMMARY_BUTTON_SLECTOR = {
         "elementProperties": {
             "viewName": "sap.ui.demo.cart.view.Checkout",
             "metadata": "sap.m.Button",
