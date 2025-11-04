@@ -73,7 +73,7 @@ describe('Home Page tests', () => {
         await allure.step('Add Out of Stock product to Cart', async () => {
             await HomePage.open();
             await HomePage.waitForPageToLoad();
-            await HomePage.clickAddToCartButtonForProductWithStatus("Out of Stock");
+            await HomePage.clickAddToCartButtonForProductWithStatus(ProductStatus.OUT_OF_STOCK);
 
             const isModalDisplayed = await HomePage.isOutOfStockConfirmationDialogDisplayed()
 
@@ -127,15 +127,15 @@ describe('Home Page tests', () => {
         await HomePage.open();
         await HomePage.waitForPageToLoad();
         
-        await HomePage.selectCategory("Accessories");
+        await HomePage.selectCategory(ProductCategory.ACCESSORIES);
         await HomePage.clickFilterButton();
-        await HomePage.selectFilter("Availability");
-        await HomePage.selectFilterOption("Available");
+        await HomePage.selectFilter(ProductFilter.AVAILABILITY);
+        await HomePage.selectFilterOption(ProductStatus.AVAILABLE);
         await HomePage.applyFiltering();
 
         let actualStatusesSet = new Set(await HomePage.getAllProductStatuses());
 
         await common.assertion.expectEqual(actualStatusesSet.size, 1);
-        await common.assertion.expectTrue(actualStatusesSet.has("Available"));
+        await common.assertion.expectTrue(actualStatusesSet.has(ProductStatus.AVAILABLE));
     });
 });

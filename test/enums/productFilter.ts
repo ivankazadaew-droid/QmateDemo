@@ -1,0 +1,3 @@
+enum ProductFilter {
+    AVAILABILITY = "Availability",
+}
