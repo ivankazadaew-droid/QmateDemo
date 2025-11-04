@@ -1,3 +1,3 @@
-enum ProductCategory {
+export enum ProductCategory {
     ACCESSORIES = "Accessories",
 }

@@ -1,3 +1,3 @@
-enum ProductFilter {
+export enum ProductFilter {
     AVAILABILITY = "Availability",
 }
