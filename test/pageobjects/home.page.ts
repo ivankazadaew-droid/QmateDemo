@@ -81,7 +81,7 @@ class HomePage {
         }
     };
 
-    _getProductCartButtonSelectorByProductStatus(productStatus: string) {
+    private getProductCartButtonSelectorByProductStatus(productStatus: string) {
         return {
             "elementProperties": {
                 "metadata": "sap.m.Button"
@@ -96,7 +96,7 @@ class HomePage {
         }
     };
 
-    _getCategorySelectorByName(categoryName: string) {
+    private getCategorySelectorByName(categoryName: string) {
         return {
             "elementProperties": {
                 "viewName": "sap.ui.demo.cart.view.Home",
@@ -106,7 +106,7 @@ class HomePage {
         }
     };
 
-    _getFilterTypeSelectorByName(filterType: string) {
+    private getFilterTypeSelectorByName(filterType: string) {
         return {
             "elementProperties": {
                 "viewName": "sap.ui.demo.cart.view.Category",
@@ -116,7 +116,7 @@ class HomePage {
         }
     };
 
-    _getFilterOptionSelectorByName(filterOption: string) {
+    private getFilterOptionSelectorByName(filterOption: string) {
         return {
             "elementProperties": {
                 "viewName": "sap.ui.demo.cart.view.Category",
@@ -155,7 +155,7 @@ class HomePage {
     }
 
     async clickAddToCartButtonForProductWithStatus(status: string) {
-        await ui5.userInteraction.click(this._getProductCartButtonSelectorByProductStatus(status));
+        await ui5.userInteraction.click(this.getProductCartButtonSelectorByProductStatus(status));
     }
 
     async isOutOfStockConfirmationDialogDisplayed() {
@@ -204,7 +204,7 @@ class HomePage {
     }
 
     async selectCategory(categoryName: string) {
-        await ui5.userInteraction.click(this._getCategorySelectorByName(categoryName));
+        await ui5.userInteraction.click(this.getCategorySelectorByName(categoryName));
     }
 
     async clickFilterButton() {
@@ -212,11 +212,11 @@ class HomePage {
     }
 
     async selectFilter(filterName: string) {
-        await ui5.userInteraction.clickListItem(this._getFilterTypeSelectorByName(filterName));
+        await ui5.userInteraction.clickListItem(this.getFilterTypeSelectorByName(filterName));
     }
 
     async selectFilterOption(filterOptionName: string) {
-        await ui5.userInteraction.check(this._getFilterOptionSelectorByName(filterOptionName));
+        await ui5.userInteraction.check(this.getFilterOptionSelectorByName(filterOptionName));
     }
 
     async applyFiltering() {
