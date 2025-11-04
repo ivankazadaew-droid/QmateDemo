@@ -114,8 +114,9 @@ class CheckoutPage {
 
     async waitForPageToLoad() {
         await ui5.element.getDisplayed(
-            { ...CheckoutPage.ITEMS_LIST_SELECTOR, timeout: 10000 },
-            0
+            CheckoutPage.ITEMS_LIST_SELECTOR,
+            0,
+            10000
         );
     }
      

@@ -28,7 +28,7 @@ class OrderCompleted {
             OrderCompleted.SUCCESS_MESSAGE_SELECTOR, 
             "htmlText",
             0,
-            30000
+            10000
         );
     }
 }
