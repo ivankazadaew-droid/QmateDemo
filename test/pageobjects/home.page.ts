@@ -1,3 +1,5 @@
+import BasePage from "./base.page.ts";
+
 class HomePage extends BasePage {
 
     static readonly URL = "/test-resources/sap/m/demokit/cart/webapp/index.html";
@@ -55,7 +57,7 @@ class HomePage extends BasePage {
 
     static readonly PRODUCT_LIST_SELECTOR = {
         "elementProperties": {
-            "viewName": "sap.ui.demo.cart.view.Category",
+            "viewName": "sap.ui.demo.cart.view.Home",
             "metadata": "sap.m.ObjectListItem"
         }
     };
@@ -169,36 +171,37 @@ class HomePage extends BasePage {
         );
     }
 
-    async getAllCategoryTitles() {
-        let categoriesElements = await ui5.element.getAllDisplayed(
-            HomePage.CATEGORIES_LIST_SELECTOR
-        ) as unknown as Element[];
+    async getAllCategoryTitles(): Promise<string[]> {
+        const elements = await ui5.element.getAllDisplayed(HomePage.CATEGORIES_LIST_SELECTOR);
 
-        let titlePromises = categoriesElements.map((element) => { 
-            return ui5.control.getProperty(element as unknown as WebdriverIO.Element, "title"); 
-        });
-        
-        return await Promise.all(titlePromises); 
+        return Promise.all(
+            elements.map(async (el) => {
+                const title = await ui5.control.getProperty<string>(el, "title");
+                return title || '';
+            })
+        );
     }
 
-    async getAllProductTitles() {
-        let productElements = await ui5.element.getAllDisplayed(
-            HomePage.PRODUCT_LIST_SELECTOR
-        ) as unknown as Element[];
-        let titlePromises = productElements.map(async(element) => {
-            return ui5.control.getProperty(element as unknown as WebdriverIO.Element, "title");
-        });
-        return await Promise.all(titlePromises);
+    async getAllProductTitles(): Promise<string[]> {
+        let elements = await ui5.element.getAllDisplayed(HomePage.PRODUCT_LIST_SELECTOR);
+
+        return Promise.all(
+            elements.map(async (el) => {
+                const title = await ui5.control.getProperty<string>(el, "title");
+                return title || '';
+            })
+        );
     }
 
     async getAllProductStatuses() {
-        let statusElements = await ui5.element.getAllDisplayed(
-            HomePage.PRODUCT_STATUS_SELECTOR
-        ) as unknown as Element[];
-        let statusPromises = statusElements.map(async(element) => {
-            return ui5.control.getProperty(element as unknown as WebdriverIO.Element, "text");
-        });
-        return await Promise.all(statusPromises);
+        let elements = await ui5.element.getAllDisplayed(HomePage.PRODUCT_STATUS_SELECTOR);
+        
+        return Promise.all(
+            elements.map(async (el) => {
+                const title = await ui5.control.getProperty<string>(el, "text");
+                return title || '';
+            })
+        );
     }
 
     async searchForProduct(productName: string) {

@@ -1,3 +1,5 @@
+import BasePage from './base.page.ts';
+
 class CheckoutPage extends BasePage {
 
     static readonly ITEMS_LIST_SELECTOR = {

@@ -1,3 +1,5 @@
+import BasePage from "./base.page.ts";
+
 class OrderCompleted extends BasePage {
 
     static readonly PAGE_CONTENT_CONTAINER_SELECTOR = {
