@@ -1,7 +1,7 @@
 declare namespace ui5 {
     interface ElementModule {
         getDisplayed(selector: object, index?: number, timeout?: number): Promise<WebdriverIO.Element>; 
-        getAllDisplayed(selector: object, timeout?: number): Promise<WebdriverIO.ElementArray>;
+        getAllDisplayed(selector: string | Record<string, any>): Promise<WebdriverIO.Element[]>;
         isVisible(selector: object, timeout?: number): Promise<boolean>;
         getPropertyValue(selector: object, property: string, index?: number, timeout?: number): Promise<any>;
         get(selector: object, scope?: WebdriverIO.Element, index?: number, timeout?: number): Promise<WebdriverIO.Element>;
@@ -9,7 +9,7 @@ declare namespace ui5 {
     const element: ElementModule;
     
     interface ControlModule {
-        getProperty(element: WebdriverIO.Element, property: string, index?: number, timeout?: number): Promise<any>;
+        getProperty<T = any>(element: WebdriverIO.Element,propertyName: string): Promise<T>;
     }
     const control: ControlModule;
     
