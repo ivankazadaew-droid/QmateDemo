@@ -19,7 +19,7 @@ declare namespace ui5 {
   const element: ElementModule;
 
   interface ControlModule {
-    getProperty<T = unknown>(element: WebdriverIO.Element, propertyName: string): Promise<T>;
+    getProperty<T = unknown>(element: unknown, propertyName: string): Promise<T>;
   }
   const control: ControlModule;
 
@@ -41,6 +41,11 @@ declare namespace ui5 {
     clickYes(): Promise<void>;
   }
   const confirmationDialog: ConfirmationDialogModule;
+
+  interface NavigationBarModule {
+    clickBack(timeout?: number): Promise<void>;
+  }
+  const navigationBar: NavigationBarModule;
 }
 
 declare namespace common {
