@@ -1,3 +1,4 @@
 export enum ProductCategory {
-  ACCESSORIES = 'Accessories',
+  ACCESSORIES = 'AC',
+  LAPTOPS = 'LT',
 }
