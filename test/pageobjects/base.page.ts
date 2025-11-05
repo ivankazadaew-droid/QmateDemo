@@ -1,3 +1,3 @@
 export default abstract class BasePage {
-    public abstract waitForPageToLoad(): Promise<void>;
+  public abstract waitForPageToLoad(): Promise<void>;
 }

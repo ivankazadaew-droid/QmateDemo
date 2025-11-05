@@ -1,3 +1,3 @@
 export enum ProductFilter {
-    AVAILABILITY = "Availability",
+  AVAILABILITY = 'Availability',
 }

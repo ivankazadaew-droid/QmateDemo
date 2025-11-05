@@ -1,232 +1,227 @@
-import BasePage from "./base.page.ts";
+import BasePage from './base.page.ts';
 
 class HomePage extends BasePage {
+  static readonly URL = '/test-resources/sap/m/demokit/cart/webapp/index.html';
 
-    static readonly URL = "/test-resources/sap/m/demokit/cart/webapp/index.html";
-
-    static readonly WELCOME_HEADLINE_SELECTOR = {
-        "elementProperties": {
-            "viewName": "sap.ui.demo.cart.view.Welcome",
-            "metadata": "sap.m.Title",
-            "text": [
-                {
-                    "path": "i18n>welcomeHeadline"
-                }
-            ]
-        }
-    };
-
-    static readonly ADD_BUTTON_SELECTOR = {
-        "elementProperties": {
-            "viewName": "sap.ui.demo.cart.view.Welcome",
-            "metadata": "sap.m.Button",
-            "bindingContextPath": "/Promoted/0"
-        }
-    };
-
-    static readonly CART_BUTTON_SELECTOR = {
-        "elementProperties": {
-            "viewName": "sap.ui.demo.cart.view.Welcome",
-            "metadata": "sap.m.ToggleButton"
-        }
-    };
-
-    static readonly PROCEED_CART_BUTTON_SELECTOR = {
-        "elementProperties": {
-            "viewName": "sap.ui.demo.cart.view.Cart",
-            "metadata": "sap.m.Button",
-            "id": "*proceedButton"
-        }
-    };
-
-    static readonly OUT_OF_STOCK_CONFIRMATION_DIALOG = {
-        "elementProperties": {
-            "metadata": "sap.m.Bar"
+  static readonly WELCOME_HEADLINE_SELECTOR = {
+    elementProperties: {
+      viewName: 'sap.ui.demo.cart.view.Welcome',
+      metadata: 'sap.m.Title',
+      text: [
+        {
+          path: 'i18n>welcomeHeadline',
         },
-        "ancestorProperties": {
-            "metadata": "sap.m.Dialog"
-        }
+      ],
+    },
+  };
+
+  static readonly ADD_BUTTON_SELECTOR = {
+    elementProperties: {
+      viewName: 'sap.ui.demo.cart.view.Welcome',
+      metadata: 'sap.m.Button',
+      bindingContextPath: '/Promoted/0',
+    },
+  };
+
+  static readonly CART_BUTTON_SELECTOR = {
+    elementProperties: {
+      viewName: 'sap.ui.demo.cart.view.Welcome',
+      metadata: 'sap.m.ToggleButton',
+    },
+  };
+
+  static readonly PROCEED_CART_BUTTON_SELECTOR = {
+    elementProperties: {
+      viewName: 'sap.ui.demo.cart.view.Cart',
+      metadata: 'sap.m.Button',
+      id: '*proceedButton',
+    },
+  };
+
+  static readonly OUT_OF_STOCK_CONFIRMATION_DIALOG = {
+    elementProperties: {
+      metadata: 'sap.m.Bar',
+    },
+    ancestorProperties: {
+      metadata: 'sap.m.Dialog',
+    },
+  };
+
+  static readonly CATEGORIES_LIST_SELECTOR = {
+    elementProperties: {
+      viewName: 'sap.ui.demo.cart.view.Home',
+      metadata: 'sap.m.StandardListItem',
+    },
+  };
+
+  static readonly PRODUCT_LIST_SELECTOR = {
+    elementProperties: {
+      viewName: 'sap.ui.demo.cart.view.Home',
+      metadata: 'sap.m.ObjectListItem',
+    },
+  };
+
+  static readonly PRODUCT_STATUS_SELECTOR = {
+    elementProperties: {
+      viewName: 'sap.ui.demo.cart.view.Category',
+      metadata: 'sap.m.ObjectStatus',
+    },
+  };
+
+  static readonly SEARCH_FIELD_SELECTOR = {
+    elementProperties: {
+      viewName: 'sap.ui.demo.cart.view.Home',
+      metadata: 'sap.m.SearchField',
+      id: '*searchField',
+    },
+  };
+
+  static readonly FILTER_BUTTON_SELECTOR = {
+    elementProperties: {
+      viewName: 'sap.ui.demo.cart.view.Category',
+      metadata: 'sap.m.Button',
+      id: '*masterListFilterButton',
+    },
+  };
+
+  private getProductCartButtonSelectorByProductStatus(productStatus: string): object {
+    return {
+      elementProperties: {
+        metadata: 'sap.m.Button',
+      },
+      ancestorProperties: {
+        metadata: 'sap.ui.layout.BlockLayoutCell',
+        descendantProperties: {
+          metadata: 'sap.m.ObjectStatus',
+          text: productStatus,
+        },
+      },
     };
+  }
 
-    static readonly CATEGORIES_LIST_SELECTOR = {
-        "elementProperties": {
-            "viewName": "sap.ui.demo.cart.view.Home",
-            "metadata": "sap.m.StandardListItem"
-        }
+  private getCategorySelectorByName(categoryName: string): object {
+    return {
+      elementProperties: {
+        viewName: 'sap.ui.demo.cart.view.Home',
+        metadata: 'sap.m.StandardListItem',
+        title: categoryName,
+      },
     };
+  }
 
-    static readonly PRODUCT_LIST_SELECTOR = {
-        "elementProperties": {
-            "viewName": "sap.ui.demo.cart.view.Home",
-            "metadata": "sap.m.ObjectListItem"
-        }
+  private getFilterTypeSelectorByName(filterType: string): object {
+    return {
+      elementProperties: {
+        viewName: 'sap.ui.demo.cart.view.Category',
+        metadata: 'sap.m.StandardListItem',
+        title: filterType,
+      },
     };
+  }
 
-    static readonly PRODUCT_STATUS_SELECTOR = {
-        "elementProperties": {
-            "viewName": "sap.ui.demo.cart.view.Category",
-            "metadata": "sap.m.ObjectStatus",
-        }
+  private getFilterOptionSelectorByName(filterOption: string): object {
+    return {
+      elementProperties: {
+        viewName: 'sap.ui.demo.cart.view.Category',
+        metadata: 'sap.m.CheckBox',
+      },
+      ancestorProperties: {
+        viewName: 'sap.ui.demo.cart.view.Category',
+        metadata: 'sap.m.StandardListItem',
+        title: filterOption,
+      },
     };
+  }
 
-    static readonly SEARCH_FIELD_SELECTOR = {
-        "elementProperties": {
-            "viewName": "sap.ui.demo.cart.view.Home",
-            "metadata": "sap.m.SearchField",
-            "id": "*searchField"
-        }    
-    };
+  async open(): Promise<void> {
+    await browser.url(HomePage.URL);
+  }
 
-    static readonly FILTER_BUTTON_SELECTOR = {
-        "elementProperties": {
-            "viewName": "sap.ui.demo.cart.view.Category",
-            "metadata": "sap.m.Button",
-            "id": "*masterListFilterButton"
-        }
-    };
+  async waitForPageToLoad(): Promise<void> {
+    await ui5.element.getDisplayed(HomePage.WELCOME_HEADLINE_SELECTOR, 0, 10000);
+  }
 
-    private getProductCartButtonSelectorByProductStatus(productStatus: string) {
-        return {
-            "elementProperties": {
-                "metadata": "sap.m.Button"
-            },
-            "ancestorProperties": {
-                "metadata": "sap.ui.layout.BlockLayoutCell",
-                "descendantProperties": {
-                "metadata": "sap.m.ObjectStatus",
-                    "text": productStatus 
-                }
-            }
-        }
-    };
+  async clickAddItemButton(): Promise<void> {
+    await ui5.userInteraction.click(HomePage.ADD_BUTTON_SELECTOR);
+  }
 
-    private getCategorySelectorByName(categoryName: string) {
-        return {
-            "elementProperties": {
-                "viewName": "sap.ui.demo.cart.view.Home",
-                "metadata": "sap.m.StandardListItem",
-                "title": categoryName
-            }
-        }
-    };
+  async clickCartButton(): Promise<void> {
+    await ui5.userInteraction.click(HomePage.CART_BUTTON_SELECTOR);
+  }
 
-    private getFilterTypeSelectorByName(filterType: string) {
-        return {
-            "elementProperties": {
-                "viewName": "sap.ui.demo.cart.view.Category",
-                "metadata": "sap.m.StandardListItem",
-                "title": filterType
-            }
-        }
-    };
+  async clickProceedCartButton(): Promise<void> {
+    await ui5.userInteraction.click(HomePage.PROCEED_CART_BUTTON_SELECTOR);
+  }
 
-    private getFilterOptionSelectorByName(filterOption: string) {
-        return {
-            "elementProperties": {
-                "viewName": "sap.ui.demo.cart.view.Category",
-                "metadata": "sap.m.CheckBox"
-            },
-            "ancestorProperties": {
-                "viewName": "sap.ui.demo.cart.view.Category",
-                "metadata": "sap.m.StandardListItem",
-                "title": filterOption
-            }
-        }
-    };
+  async clickAddToCartButtonForProductWithStatus(status: string): Promise<void> {
+    await ui5.userInteraction.click(this.getProductCartButtonSelectorByProductStatus(status));
+  }
 
-    async open() {
-        await browser.url(HomePage.URL);
-    }
+  async isOutOfStockConfirmationDialogDisplayed(): Promise<boolean> {
+    return (await ui5.element.getPropertyValue(
+      HomePage.OUT_OF_STOCK_CONFIRMATION_DIALOG,
+      'visible',
+      0,
+      10000,
+    )) as Promise<boolean>;
+  }
 
-    async waitForPageToLoad() {
-        await ui5.element.getDisplayed(
-            HomePage.WELCOME_HEADLINE_SELECTOR,
-            0,
-            10000
-        );
-    }
-     
-    async clickAddItemButton() {
-        await ui5.userInteraction.click(HomePage.ADD_BUTTON_SELECTOR);
-    }
+  async getAllCategoryTitles(): Promise<string[]> {
+    const elements = await ui5.element.getAllDisplayed(HomePage.CATEGORIES_LIST_SELECTOR);
 
-    async clickCartButton() {
-        await ui5.userInteraction.click(HomePage.CART_BUTTON_SELECTOR);
-    }
+    return Promise.all(
+      elements.map(async (el) => {
+        const title = await ui5.control.getProperty<string>(el, 'title');
+        return title || '';
+      }),
+    );
+  }
 
-    async clickProceedCartButton() {
-        await ui5.userInteraction.click(HomePage.PROCEED_CART_BUTTON_SELECTOR);
-    }
+  async getAllProductTitles(): Promise<string[]> {
+    const elements = await ui5.element.getAllDisplayed(HomePage.PRODUCT_LIST_SELECTOR);
 
-    async clickAddToCartButtonForProductWithStatus(status: string) {
-        await ui5.userInteraction.click(this.getProductCartButtonSelectorByProductStatus(status));
-    }
+    return Promise.all(
+      elements.map(async (el) => {
+        const title = await ui5.control.getProperty<string>(el, 'title');
+        return title || '';
+      }),
+    );
+  }
 
-    async isOutOfStockConfirmationDialogDisplayed() {
-        return await ui5.element.getPropertyValue(
-            HomePage.OUT_OF_STOCK_CONFIRMATION_DIALOG, 
-            "visible",
-            0,
-            10000
-        );
-    }
+  async getAllProductStatuses(): Promise<string[]> {
+    const elements = await ui5.element.getAllDisplayed(HomePage.PRODUCT_STATUS_SELECTOR);
 
-    async getAllCategoryTitles(): Promise<string[]> {
-        const elements = await ui5.element.getAllDisplayed(HomePage.CATEGORIES_LIST_SELECTOR);
+    return Promise.all(
+      elements.map(async (el) => {
+        const title = await ui5.control.getProperty<string>(el, 'text');
+        return title || '';
+      }),
+    );
+  }
 
-        return Promise.all(
-            elements.map(async (el) => {
-                const title = await ui5.control.getProperty<string>(el, "title");
-                return title || '';
-            })
-        );
-    }
+  async searchForProduct(productName: string): Promise<void> {
+    await ui5.userInteraction.searchFor(HomePage.SEARCH_FIELD_SELECTOR, productName);
+  }
 
-    async getAllProductTitles(): Promise<string[]> {
-        let elements = await ui5.element.getAllDisplayed(HomePage.PRODUCT_LIST_SELECTOR);
+  async selectCategory(categoryName: string): Promise<void> {
+    await ui5.userInteraction.click(this.getCategorySelectorByName(categoryName));
+  }
 
-        return Promise.all(
-            elements.map(async (el) => {
-                const title = await ui5.control.getProperty<string>(el, "title");
-                return title || '';
-            })
-        );
-    }
+  async clickFilterButton(): Promise<void> {
+    await ui5.userInteraction.click(HomePage.FILTER_BUTTON_SELECTOR);
+  }
 
-    async getAllProductStatuses() {
-        let elements = await ui5.element.getAllDisplayed(HomePage.PRODUCT_STATUS_SELECTOR);
-        
-        return Promise.all(
-            elements.map(async (el) => {
-                const title = await ui5.control.getProperty<string>(el, "text");
-                return title || '';
-            })
-        );
-    }
+  async selectFilter(filterName: string): Promise<void> {
+    await ui5.userInteraction.clickListItem(this.getFilterTypeSelectorByName(filterName));
+  }
 
-    async searchForProduct(productName: string) {
-        await ui5.userInteraction.searchFor(HomePage.SEARCH_FIELD_SELECTOR, productName);
-    }
+  async selectFilterOption(filterOptionName: string): Promise<void> {
+    await ui5.userInteraction.check(this.getFilterOptionSelectorByName(filterOptionName));
+  }
 
-    async selectCategory(categoryName: string) {
-        await ui5.userInteraction.click(this.getCategorySelectorByName(categoryName));
-    }
-
-    async clickFilterButton() {
-        await ui5.userInteraction.click(HomePage.FILTER_BUTTON_SELECTOR);
-    }
-
-    async selectFilter(filterName: string) {
-        await ui5.userInteraction.clickListItem(this.getFilterTypeSelectorByName(filterName));
-    }
-
-    async selectFilterOption(filterOptionName: string) {
-        await ui5.userInteraction.check(this.getFilterOptionSelectorByName(filterOptionName));
-    }
-
-    async applyFiltering() {
-        await ui5.confirmationDialog.clickOk();
-    }
+  async applyFiltering(): Promise<void> {
+    await ui5.confirmationDialog.clickOk();
+  }
 }
 
 export default new HomePage();
