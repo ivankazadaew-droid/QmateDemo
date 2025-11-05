@@ -12,6 +12,7 @@ import OrderCompletedPage from '../pageobjects/orderCompleted.page.ts';
 import { ProductCategory } from '../enums/productCategory.enum.ts';
 import { ProductFilter } from '../enums/productFilter.enum.ts';
 import { ProductStatus } from '../enums/productStatus.enum.ts';
+import { ProductSuplier } from '../enums/productSuplier.enum.ts';
 
 describe('Home Page tests', () => {
   it('Add any item', async () => {
@@ -118,7 +119,7 @@ describe('Home Page tests', () => {
 
     await HomePage.searchForProduct('Screen clean');
 
-    const actualProducts: string[] = await HomePage.getAllProductTitles();
+    const actualProducts: string[] = await HomePage.getAllFoundProductTitles();
 
     await common.assertion.expectEqual(actualProducts.length, 1);
     await common.assertion.expectEqual(actualProducts[0], 'Screen clean');
@@ -138,5 +139,37 @@ describe('Home Page tests', () => {
 
     await common.assertion.expectEqual(actualStatusesSet.size, 1);
     await common.assertion.expectTrue(actualStatusesSet.has(ProductStatus.AVAILABLE));
+  });
+
+  it('Verify cart contains added products', async () => {
+    let expectedCartItems: string[] = [];
+
+    await HomePage.open();
+    await HomePage.waitForPageToLoad();
+    await HomePage.selectCategory(ProductCategory.ACCESSORIES);
+    await HomePage.clickFilterButton();
+    await HomePage.selectFilter(ProductFilter.AVAILABILITY);
+    await HomePage.selectFilterOption(ProductStatus.AVAILABLE);
+    await HomePage.applyFiltering();
+    await HomePage.selectFirstProduct();
+    await HomePage.clickAddToCartButtonForSelectedProduct();
+    expectedCartItems.push(await HomePage.getProductViewProductName());
+
+    await HomePage.clickCategoriesBackButton();
+    await HomePage.selectCategory(ProductCategory.LAPTOPS);
+    await HomePage.clickFilterButton();
+    await HomePage.resetFilters();
+    await HomePage.selectFilter(ProductFilter.SUPLIER);
+    await HomePage.selectFilterOption(ProductSuplier.ULTRASONIC_UNITED);
+    await HomePage.applyFiltering();
+    await HomePage.selectFirstProduct();
+    await HomePage.clickAddToCartButtonForSelectedProduct();
+    expectedCartItems.push(await HomePage.getProductViewProductName());
+
+    await HomePage.clickProductViewCartButton();
+
+    const actualCartItems: string[] = await HomePage.getCartItems();
+
+    await common.assertion.expectEqual(actualCartItems, expectedCartItems);
   });
 });

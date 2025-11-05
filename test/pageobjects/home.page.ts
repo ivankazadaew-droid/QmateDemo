@@ -1,3 +1,4 @@
+import { ProductCategory } from '../enums/productCategory.enum.ts';
 import BasePage from './base.page.ts';
 
 class HomePage extends BasePage {
@@ -15,7 +16,7 @@ class HomePage extends BasePage {
     },
   };
 
-  static readonly ADD_BUTTON_SELECTOR = {
+  static readonly WELCOME_VIEW_ADD_BUTTON_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Welcome',
       metadata: 'sap.m.Button',
@@ -23,9 +24,35 @@ class HomePage extends BasePage {
     },
   };
 
+  static readonly PRODUCT_VIEW_ADD_BUTTON_SELECTOR = {
+    elementProperties: {
+      viewName: 'sap.ui.demo.cart.view.Product',
+      metadata: 'sap.m.Button',
+      text: [
+        {
+          path: 'i18n>addToCartShort',
+        },
+      ],
+    },
+  };
+
+  static readonly PRODUCT_VIEW_HEADER_SELECTOR = {
+    elementProperties: {
+      viewName: 'sap.ui.demo.cart.view.Product',
+      metadata: 'sap.m.ObjectHeader',
+    },
+  };
+
   static readonly CART_BUTTON_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Welcome',
+      metadata: 'sap.m.ToggleButton',
+    },
+  };
+
+  static readonly PRODUCT_VIEW_CART_BUTTON_SELECTOR = {
+    elementProperties: {
+      viewName: 'sap.ui.demo.cart.view.Product',
       metadata: 'sap.m.ToggleButton',
     },
   };
@@ -56,6 +83,13 @@ class HomePage extends BasePage {
 
   static readonly PRODUCT_LIST_SELECTOR = {
     elementProperties: {
+      viewName: 'sap.ui.demo.cart.view.Category',
+      metadata: 'sap.m.ObjectListItem',
+    },
+  };
+
+  static readonly FOUND_PRODUCTS_LIST_SELECTOR = {
+    elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Home',
       metadata: 'sap.m.ObjectListItem',
     },
@@ -84,6 +118,29 @@ class HomePage extends BasePage {
     },
   };
 
+  static readonly CART_PRODUCT_LIST_SELECTOR = {
+    elementProperties: {
+      viewName: 'sap.ui.demo.cart.view.Cart',
+      metadata: 'sap.m.ObjectListItem',
+    },
+  };
+
+  static readonly CATEGORIES_BACK_BUTTON_SELECTOR = {
+    elementProperties: {
+      viewName: 'sap.ui.demo.cart.view.Category',
+      metadata: 'sap.m.Button',
+      id: '*page-navButton',
+    },
+  };
+
+  static readonly RESET_FILTERS_BUTTON_SELECTOR = {
+    elementProperties: {
+      viewName: 'sap.ui.demo.cart.view.Category',
+      metadata: 'sap.m.Button',
+      id: '*categoryFilterDialog-detailresetbutton',
+    },
+  };
+
   private getProductCartButtonSelectorByProductStatus(productStatus: string): object {
     return {
       elementProperties: {
@@ -99,12 +156,12 @@ class HomePage extends BasePage {
     };
   }
 
-  private getCategorySelectorByName(categoryName: string): object {
+  private getCategorySelector(category: ProductCategory): object {
     return {
       elementProperties: {
         viewName: 'sap.ui.demo.cart.view.Home',
         metadata: 'sap.m.StandardListItem',
-        title: categoryName,
+        bindingContextPath: `/ProductCategories*('${category}')`,
       },
     };
   }
@@ -142,11 +199,15 @@ class HomePage extends BasePage {
   }
 
   async clickAddItemButton(): Promise<void> {
-    await ui5.userInteraction.click(HomePage.ADD_BUTTON_SELECTOR);
+    await ui5.userInteraction.click(HomePage.WELCOME_VIEW_ADD_BUTTON_SELECTOR);
   }
 
   async clickCartButton(): Promise<void> {
     await ui5.userInteraction.click(HomePage.CART_BUTTON_SELECTOR);
+  }
+
+  async clickProductViewCartButton(): Promise<void> {
+    await ui5.userInteraction.click(HomePage.PRODUCT_VIEW_CART_BUTTON_SELECTOR);
   }
 
   async clickProceedCartButton(): Promise<void> {
@@ -177,8 +238,8 @@ class HomePage extends BasePage {
     );
   }
 
-  async getAllProductTitles(): Promise<string[]> {
-    const elements = await ui5.element.getAllDisplayed(HomePage.PRODUCT_LIST_SELECTOR);
+  async getAllFoundProductTitles(): Promise<string[]> {
+    const elements = await ui5.element.getAllDisplayed(HomePage.FOUND_PRODUCTS_LIST_SELECTOR);
 
     return Promise.all(
       elements.map(async (el) => {
@@ -203,8 +264,8 @@ class HomePage extends BasePage {
     await ui5.userInteraction.searchFor(HomePage.SEARCH_FIELD_SELECTOR, productName);
   }
 
-  async selectCategory(categoryName: string): Promise<void> {
-    await ui5.userInteraction.click(this.getCategorySelectorByName(categoryName));
+  async selectCategory(category: ProductCategory): Promise<void> {
+    await ui5.userInteraction.click(this.getCategorySelector(category));
   }
 
   async clickFilterButton(): Promise<void> {
@@ -221,6 +282,37 @@ class HomePage extends BasePage {
 
   async applyFiltering(): Promise<void> {
     await ui5.confirmationDialog.clickOk();
+  }
+
+  async selectFirstProduct(): Promise<void> {
+    await ui5.userInteraction.click(HomePage.PRODUCT_LIST_SELECTOR, 0);
+  }
+
+  async clickAddToCartButtonForSelectedProduct(): Promise<void> {
+    await ui5.userInteraction.click(HomePage.PRODUCT_VIEW_ADD_BUTTON_SELECTOR);
+  }
+
+  async getProductViewProductName(): Promise<string> {
+    return ui5.control.getProperty<string>(HomePage.PRODUCT_VIEW_HEADER_SELECTOR, 'title');
+  }
+
+  async clickCategoriesBackButton(): Promise<void> {
+    await ui5.userInteraction.click(HomePage.CATEGORIES_BACK_BUTTON_SELECTOR);
+  }
+
+  async getCartItems(): Promise<string[]> {
+    const elements = await ui5.element.getAllDisplayed(HomePage.CART_PRODUCT_LIST_SELECTOR);
+
+    return Promise.all(
+      elements.map(async (el) => {
+        const title = await ui5.control.getProperty<string>(el, 'title');
+        return title || '';
+      }),
+    );
+  }
+
+  async resetFilters(): Promise<void> {
+    await ui5.userInteraction.click(HomePage.RESET_FILTERS_BUTTON_SELECTOR);
   }
 }
 
