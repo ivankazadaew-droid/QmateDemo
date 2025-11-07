@@ -232,7 +232,7 @@ class HomePage extends BasePage {
 
     return Promise.all(
       elements.map(async (el) => {
-        const title = await ui5.control.getProperty<string>(el, 'title');
+        const title = (await ui5.control.getProperty(el, 'title')) as string;
         return title || '';
       }),
     );
@@ -243,7 +243,7 @@ class HomePage extends BasePage {
 
     return Promise.all(
       elements.map(async (el) => {
-        const title = await ui5.control.getProperty<string>(el, 'title');
+        const title = (await ui5.control.getProperty(el, 'title')) as string;
         return title || '';
       }),
     );
@@ -254,7 +254,7 @@ class HomePage extends BasePage {
 
     return Promise.all(
       elements.map(async (el) => {
-        const title = await ui5.control.getProperty<string>(el, 'text');
+        const title = (await ui5.control.getProperty(el, 'text')) as string;
         return title || '';
       }),
     );
@@ -293,7 +293,10 @@ class HomePage extends BasePage {
   }
 
   async getProductViewProductName(): Promise<string> {
-    return ui5.control.getProperty<string>(HomePage.PRODUCT_VIEW_HEADER_SELECTOR, 'title');
+    return ui5.control.getProperty(
+      HomePage.PRODUCT_VIEW_HEADER_SELECTOR,
+      'title',
+    ) as Promise<string>;
   }
 
   async clickCategoriesBackButton(): Promise<void> {
@@ -305,7 +308,7 @@ class HomePage extends BasePage {
 
     return Promise.all(
       elements.map(async (el) => {
-        const title = await ui5.control.getProperty<string>(el, 'title');
+        const title = (await ui5.control.getProperty(el, 'title')) as string;
         return title || '';
       }),
     );
