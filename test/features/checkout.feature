@@ -19,15 +19,15 @@ Feature: Checkout Process
 
    Examples:
       | Category     | Filter       | Filter option     | Product        | Quantity |
-      # | Flat Screens | Availability | Available         | Screen clean   | 2        |
+      | Flat Screens | Availability | Available         | Screen clean   | 2        |
       | Laptops      | Supplier     | Ultrasonic United | Smart Firewall | 4        |
 
-   # Scenario: Verify cart contains products selected by category
-   #    When Open Home page
-   #    And Add any product from "Smartphones and Tablets" category to the cart
-   #    Then Verify cart contains exactly added products
+   Scenario: Verify cart contains products selected by category
+      When Open Home page
+      And Add any product from "Smartphones and Tablets" category to the cart
+      Then Verify cart contains exactly added products
 
-   # Scenario: Verify cart contains products found by name
-   #    When Open Home page
-   #    And Add "e-Book Reader ReadMe" product to the cart
-   #    Then Verify cart contains exactly added products
+   Scenario: Verify cart contains products found by name
+      When Open Home page
+      And Add "e-Book Reader ReadMe" product to the cart
+      Then Verify cart contains exactly added products
