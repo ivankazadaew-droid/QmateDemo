@@ -280,8 +280,8 @@ class HomePage {
     }
 
     async clickProductViewCartButton() {
-    await ui5.userInteraction.click(HomePage.PRODUCT_VIEW_CART_BUTTON_SELECTOR);
-  }
+        await ui5.userInteraction.click(HomePage.PRODUCT_VIEW_CART_BUTTON_SELECTOR);
+    }
 }
 
 export default new HomePage();
