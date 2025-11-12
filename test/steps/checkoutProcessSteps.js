@@ -7,7 +7,7 @@ import CheckoutPage from '../pageobjects/checkout.page.js';
 import OrderSummary from '../pageobjects/orderSummary.page.js';
 import OrderCompletedPage from '../pageobjects/orderCompleted.page.js';
 
-Given('the user is on the home page', async function () {
+Given(/^Home page is opened$|^Open Home page$/, async function () {
   await HomePage.open();
   await HomePage.waitForPageToLoad();
   await browser.takeScreenshot();
@@ -58,7 +58,7 @@ When('the user fills in card details', async function () {
   });
 
   await allure.step('Input expiration date', async () => {
-     await CheckoutPage.inputExpirationDate(expirationDate);
+    await CheckoutPage.inputExpirationDate(expirationDate);
     await common.userInteraction.pressEnter();
     await browser.takeScreenshot();
   });
@@ -88,6 +88,54 @@ When('the user choses delivery type', async function () {
   await browser.takeScreenshot();
 });
 
+When(/^Add any product from "([^"]+)" category(?: filtered by "([^"]+)": "([^"]+)")? to the cart$/, async function (category, filter, filterOption) {
+  await HomePage.selectCategory(category);
+  
+  if (filter && filterOption) {
+    await HomePage.clickFilterButton();
+    await HomePage.selectFilter(filter);
+    await HomePage.selectFilterOption(filterOption);
+
+    await browser.takeScreenshot();
+
+    await HomePage.applyFiltering();
+
+    await browser.takeScreenshot();
+  }
+
+  await HomePage.selectFirstProduct();
+
+  this.addCartItem(await HomePage.getSelectedProductDetails());
+
+  await HomePage.clickAddToCartButtonForSelectedProduct();
+
+  await browser.takeScreenshot();
+
+  if (filter && filterOption) {
+    await HomePage.clickCategoriesBackButton();
+  }
+});
+
+When(/^Add "([^"]+)" product to the cart( with quantity "(\d+)")?$/, async function (productName, quantity) {
+  await HomePage.searchForProduct(productName);
+  await HomePage.selectFoundProduct();
+
+  await browser.takeScreenshot();
+
+  let product = await HomePage.getSelectedProductDetails();
+  
+  const productQuantity = parseInt(quantity ?? 1);
+  product.quantity = productQuantity;
+
+  this.addCartItem(product);
+
+  for (let i = 0; i < productQuantity ; i++) {
+    await HomePage.clickAddToCartButtonForSelectedProduct();  
+  }
+
+  await browser.takeScreenshot();
+});
+
 When('the user reviews the order summary', async function () {
   await CheckoutPage.clickOrderSummaryButton();
   await OrderSummary.waitForPageToLoad();
@@ -108,5 +156,14 @@ Then('the order is successfully completed', async function () {
   const expectedText = "Thank you for your order!";
   
   await common.assertion.expectToContain(successMessageText, expectedText);
+  await browser.takeScreenshot();
+});
+
+Then('Verify cart contains exactly added products', async function () {
+  await HomePage.clickProductViewCartButton();
+  const actualCartItems = await HomePage.getCartItems();
+
+  await common.assertion.expectEqual(actualCartItems, this.getCartItems());
+
   await browser.takeScreenshot();
 });
