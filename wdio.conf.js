@@ -143,6 +143,7 @@ export const config = {
         outputDir: 'allure-results',
         disableWebdriverStepsReporting: true,
         disableWebdriverScreenshotsReporting: false,
+        useCucumberStepReporter: true,
     }]],
 
     // Options to be passed to Mocha.
@@ -206,6 +207,15 @@ export const config = {
      */
     // before: async (capabilities, specs) => {
     // },
+
+    beforeScenario: async function (uri, feature, scenario) {
+        const { allure } = require('@wdio/allure-reporter').default;
+        allure.addFeature(scenario.pickle.name);
+        scenario.pickle.parameters.forEach(param => {
+            allure.addParameter(param.name, param.value);
+        });
+    },
+
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {string} commandName hook command name
@@ -252,6 +262,9 @@ export const config = {
         }
     },
 
+    afterScenario: async function (uri, feature, scenario, result, sourceLocation) {
+        await browser.reloadSession();
+    },
 
     /**
      * Hook that gets executed after the suite has ended
