@@ -114,7 +114,7 @@ When(/^Add any product from "([^"]+)" category(?: filtered by "([^"]+)": "([^"]+
   await HomePage.clickCategoriesBackButton();
 });
 
-When(/^Add "([^"]+)" product to the cart( with quantity "(\d+)")?$/, async function (productName, quantity) {
+When(/^Add "([^"]+)" product to the cart(?: with quantity "(\d+)")?$/, async function (productName, quantity) {
   await HomePage.searchForProduct(productName);
   await HomePage.selectFoundProduct();
 
