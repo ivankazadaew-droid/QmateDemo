@@ -1,5 +1,5 @@
 {
-  "name": "QmateDemo",
+  "name": "qmate-project",
   "type": "module",
   "devDependencies": {
     "@faker-js/faker": "^10.1.0",
