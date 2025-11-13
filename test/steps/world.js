@@ -5,8 +5,16 @@ export class CustomWorld {
         this.cartItems = [];
     }
 
-    addCartItem(item) {
-        this.cartItems.push(item);
+    addCartItem(cartItem) {
+        const existingItem = this.cartItems.find(
+            item => item.name === cartItem.name && item.price === cartItem.price
+        );
+
+        if (existingItem) {
+            existingItem.quantity += cartItem.quantity;
+        } else {
+            this.cartItems.push(cartItem);
+        }
     }
 
     getCartItems() {
