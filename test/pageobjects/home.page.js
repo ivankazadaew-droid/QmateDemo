@@ -165,14 +165,16 @@ class HomePage {
     };
 
     async open() {
-        await browser.url("/test-resources/sap/m/demokit/cart/webapp/index.html");
+        await common.navigation.navigateToUrl(
+            util.browser.getBaseUrl() + "/test-resources/sap/m/demokit/cart/webapp/index.html"
+        );
     }
 
     async waitForPageToLoad() {
         await ui5.element.getDisplayed(
             HomePage.WELCOME_HEADLINE_SELECTOR,
             0,
-            { timeout: 10000}
+            { timeout: 10000 }
         );
     }
 
