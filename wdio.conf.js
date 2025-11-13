@@ -263,7 +263,7 @@ export const config = {
     },
 
     afterScenario: async function (uri, feature, scenario, result, sourceLocation) {
-        await browser.reloadSession();
+        await util.browser.clearBrowser();
     },
 
     /**

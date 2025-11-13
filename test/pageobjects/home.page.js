@@ -166,7 +166,7 @@ class HomePage {
 
     async open() {
         await common.navigation.navigateToUrl(
-            util.browser.getBaseUrl() + "/test-resources/sap/m/demokit/cart/webapp/index.html"
+            await util.browser.getBaseUrl() + "/test-resources/sap/m/demokit/cart/webapp/index.html"
         );
     }
 
