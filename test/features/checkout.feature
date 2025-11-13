@@ -31,3 +31,9 @@ Feature: Checkout Process
       When Open Home page
       And Add "e-Book Reader ReadMe" product to the cart
       Then Verify cart contains exactly added products
+
+   Scenario: Verify cart contains product added several times
+      When Open Home page
+      And Add "Fabric bag professional" product to the cart with quantity "2"
+      And Add any product from "Computer System Accessories" category to the cart
+      Then Verify cart contains exactly added products
