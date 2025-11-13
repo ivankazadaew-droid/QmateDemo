@@ -209,6 +209,10 @@ class HomePage {
         await ui5.userInteraction.searchFor(HomePage.SEARCH_FIELD_SELECTOR, productName, 0, 5000, false);
     }
 
+    async resetSearchField() {
+        await ui5.userInteraction.resetSearch(HomePage.SEARCH_FIELD_SELECTOR);
+    }
+
     async selectCategory(categoryName) {
         await ui5.userInteraction.click(this._getCategorySelectorByName(categoryName));
     }

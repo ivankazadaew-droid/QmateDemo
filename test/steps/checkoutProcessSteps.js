@@ -111,9 +111,7 @@ When(/^Add any product from "([^"]+)" category(?: filtered by "([^"]+)": "([^"]+
 
   await browser.takeScreenshot();
 
-  if (filter && filterOption) {
-    await HomePage.clickCategoriesBackButton();
-  }
+  await HomePage.clickCategoriesBackButton();
 });
 
 When(/^Add "([^"]+)" product to the cart( with quantity "(\d+)")?$/, async function (productName, quantity) {
@@ -134,6 +132,9 @@ When(/^Add "([^"]+)" product to the cart( with quantity "(\d+)")?$/, async funct
   }
 
   await browser.takeScreenshot();
+
+  await HomePage.clickCategoriesBackButton();
+  await HomePage.resetSearchField();
 });
 
 When('the user reviews the order summary', async function () {
@@ -160,7 +161,7 @@ Then('the order is successfully completed', async function () {
 });
 
 Then('Verify cart contains exactly added products', async function () {
-  await HomePage.clickProductViewCartButton();
+  await HomePage.clickCartButton();
   const actualCartItems = await HomePage.getCartItems();
 
   await common.assertion.expectEqual(actualCartItems, this.getCartItems());
