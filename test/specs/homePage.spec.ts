@@ -1,8 +1,8 @@
 /// <reference types="mocha" />
 
-import { faker } from '@faker-js/faker';
 import allure from '@wdio/allure-reporter';
 import { takeScreenshotAndAttach } from '../utils/allure.utils.ts';
+import testDataGenerator from '../data/testDataGenerator.ts';
 
 import HomePage from '../pageobjects/home.page.ts';
 import CheckoutPage from '../pageobjects/checkout.page.ts';
@@ -16,19 +16,8 @@ import { ProductSuplier } from '../enums/productSuplier.enum.ts';
 
 describe('Home Page tests', () => {
   it('Add any item', async () => {
-    const cardHolderName: string = faker.person.fullName();
-    const rawCardNumber: string = faker.finance.creditCardNumber();
-    const cardNumber: string = rawCardNumber.replace(/\D/g, '').substring(0, 16);
-    const securityCode: string = faker.finance.creditCardCVV();
-    const futureMonth: number = faker.date.future({ years: 5 }).getMonth() + 1;
-    const futureYear: number = faker.date.future({ years: 5 }).getFullYear();
-    const expirationDate: string = `${futureMonth.toString().padStart(2, '0')}/${futureYear}`;
-    const streetName: string = faker.location.street();
-    const houseNumber: string = faker.string.numeric(1);
-    const address: string = `${streetName.split(' ')[0]} ${houseNumber}`;
-    const city: string = faker.location.city();
-    const zipCode: string = faker.location.zipCode('#####');
-    const country: string = faker.location.country();
+    const cardDetails = testDataGenerator.generateCardDetails();
+    const addressDetails = testDataGenerator.generateAddressDetails();
 
     await HomePage.open();
     await HomePage.waitForPageToLoad();
@@ -41,18 +30,18 @@ describe('Home Page tests', () => {
     await CheckoutPage.clickStep2Button();
     await CheckoutPage.clickStep3Button();
 
-    await CheckoutPage.inputCardHolderName(cardHolderName);
-    await CheckoutPage.inputCardNumber(cardNumber);
-    await CheckoutPage.inputSecurityCode(securityCode);
-    await CheckoutPage.inputExpirationDate(expirationDate);
+    await CheckoutPage.inputCardHolderName(cardDetails.cardHolderName);
+    await CheckoutPage.inputCardNumber(cardDetails.cardNumber);
+    await CheckoutPage.inputSecurityCode(cardDetails.securityCode);
+    await CheckoutPage.inputExpirationDate(cardDetails.expirationDate);
 
     await common.userInteraction.pressEnter();
 
     await CheckoutPage.clickStep4Button();
-    await CheckoutPage.inputAddress(address);
-    await CheckoutPage.inputCity(city);
-    await CheckoutPage.inputZipCode(zipCode);
-    await CheckoutPage.inputCountry(country);
+    await CheckoutPage.inputAddress(addressDetails.address);
+    await CheckoutPage.inputCity(addressDetails.city);
+    await CheckoutPage.inputZipCode(addressDetails.zipCode);
+    await CheckoutPage.inputCountry(addressDetails.country);
 
     await common.userInteraction.pressEnter();
 
@@ -68,7 +57,7 @@ describe('Home Page tests', () => {
     const successMessageText: string = await OrderCompletedPage.getSuccessMessageText();
     const expectedText: string = 'Thank you for your order!';
 
-    await common.assertion.expectToContain(successMessageText, expectedText);
+    common.assertion.expectToContain(successMessageText, expectedText);
   });
 
   it('Verify Confirmation modal is displayed when Out of Stoke product is selected', async () => {
@@ -79,7 +68,7 @@ describe('Home Page tests', () => {
 
       const isModalDisplayed: boolean = await HomePage.isOutOfStockConfirmationDialogDisplayed();
 
-      await common.assertion.expectTrue(isModalDisplayed);
+      common.assertion.expectTrue(isModalDisplayed);
 
       await takeScreenshotAndAttach();
     });
@@ -110,7 +99,7 @@ describe('Home Page tests', () => {
 
     const actualCategories: string[] = await HomePage.getAllCategoryTitles();
 
-    await common.assertion.expectEqual(actualCategories, expectedCategories);
+    common.assertion.expectEqual(actualCategories, expectedCategories);
   });
 
   it('Verify product can be found via search bar', async () => {
@@ -121,8 +110,8 @@ describe('Home Page tests', () => {
 
     const actualProducts: string[] = await HomePage.getAllFoundProductTitles();
 
-    await common.assertion.expectEqual(actualProducts.length, 1);
-    await common.assertion.expectEqual(actualProducts[0], 'Screen clean');
+    common.assertion.expectEqual(actualProducts.length, 1);
+    common.assertion.expectEqual(actualProducts[0], 'Screen clean');
   });
 
   it('Verify products can be filtered by availability', async () => {
@@ -137,8 +126,8 @@ describe('Home Page tests', () => {
 
     const actualStatusesSet: Set<string> = new Set<string>(await HomePage.getAllProductStatuses());
 
-    await common.assertion.expectEqual(actualStatusesSet.size, 1);
-    await common.assertion.expectTrue(actualStatusesSet.has(ProductStatus.AVAILABLE));
+    common.assertion.expectEqual(actualStatusesSet.size, 1);
+    common.assertion.expectTrue(actualStatusesSet.has(ProductStatus.AVAILABLE));
   });
 
   it('Verify cart contains added products', async () => {
@@ -170,6 +159,6 @@ describe('Home Page tests', () => {
 
     const actualCartItems: string[] = await HomePage.getCartItems();
 
-    await common.assertion.expectEqual(actualCartItems, expectedCartItems);
+    common.assertion.expectEqual(actualCartItems, expectedCartItems);
   });
 });
