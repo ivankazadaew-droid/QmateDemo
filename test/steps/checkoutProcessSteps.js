@@ -153,7 +153,7 @@ Then('Verify cart contains exactly added products', async function () {
   await HomePage.clickCartButton();
   const actualCartItems = await HomePage.getCartItems();
 
-  await common.assertion.expectEqual(actualCartItems, this.getCartItems());
+  common.assertion.expectEqual(actualCartItems, this.getCartItems(), 'Message');
 
   await browser.takeScreenshot();
 });
