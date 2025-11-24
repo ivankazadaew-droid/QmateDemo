@@ -1,7 +1,7 @@
 import BasePage from './base.page.ts';
 
 class OrderCompleted extends BasePage {
-  static readonly PAGE_CONTENT_CONTAINER_SELECTOR = {
+  private static readonly PAGE_CONTENT_CONTAINER_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.OrderCompleted',
       metadata: 'sap.m.Page',
@@ -9,7 +9,7 @@ class OrderCompleted extends BasePage {
     },
   };
 
-  static readonly SUCCESS_MESSAGE_SELECTOR = {
+  private static readonly SUCCESS_MESSAGE_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.OrderCompleted',
       metadata: 'sap.m.FormattedText',

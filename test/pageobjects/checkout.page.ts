@@ -1,7 +1,7 @@
 import BasePage from './base.page.ts';
 
 class CheckoutPage extends BasePage {
-  static readonly ITEMS_LIST_SELECTOR = {
+  private static readonly ITEMS_LIST_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Checkout',
       metadata: 'sap.m.WizardStep',
@@ -9,7 +9,7 @@ class CheckoutPage extends BasePage {
     },
   };
 
-  static readonly STEP_2_BUTTON_SELECTOR = {
+  private static readonly STEP_2_BUTTON_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Checkout',
       metadata: 'sap.m.Button',
@@ -17,7 +17,7 @@ class CheckoutPage extends BasePage {
     },
   };
 
-  static readonly STEP_3_BUTTON_SELECTOR = {
+  private static readonly STEP_3_BUTTON_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Checkout',
       metadata: 'sap.m.Button',
@@ -25,7 +25,7 @@ class CheckoutPage extends BasePage {
     },
   };
 
-  static readonly STEP_4_BUTTON_SELECTOR = {
+  private static readonly STEP_4_BUTTON_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Checkout',
       metadata: 'sap.m.Button',
@@ -33,7 +33,7 @@ class CheckoutPage extends BasePage {
     },
   };
 
-  static readonly STEP_5_BUTTON_SELECTOR = {
+  private static readonly STEP_5_BUTTON_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Checkout',
       metadata: 'sap.m.Button',
@@ -41,7 +41,7 @@ class CheckoutPage extends BasePage {
     },
   };
 
-  static readonly CARD_HOLDER_NAME_INPUT_SELECTOR = {
+  private static readonly CARD_HOLDER_NAME_INPUT_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Checkout',
       metadata: 'sap.m.Input',
@@ -49,7 +49,7 @@ class CheckoutPage extends BasePage {
     },
   };
 
-  static readonly CARD_NUMBER_INPUT_SELECTOR = {
+  private static readonly CARD_NUMBER_INPUT_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Checkout',
       metadata: 'sap.m.MaskInput',
@@ -57,7 +57,7 @@ class CheckoutPage extends BasePage {
     },
   };
 
-  static readonly SECURITY_CODE_INPUT_SELECTOR = {
+  private static readonly SECURITY_CODE_INPUT_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Checkout',
       metadata: 'sap.m.MaskInput',
@@ -65,7 +65,7 @@ class CheckoutPage extends BasePage {
     },
   };
 
-  static readonly EXPIRATION_DATE_INPUT_SELECTOR = {
+  private static readonly EXPIRATION_DATE_INPUT_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Checkout',
       metadata: 'sap.m.DatePicker',
@@ -73,7 +73,7 @@ class CheckoutPage extends BasePage {
     },
   };
 
-  static readonly ADDRESS_INPUT_SELECTOR = {
+  private static readonly ADDRESS_INPUT_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Checkout',
       metadata: 'sap.m.Input',
@@ -81,7 +81,7 @@ class CheckoutPage extends BasePage {
     },
   };
 
-  static readonly CITY_INPUT_SELECTOR = {
+  private static readonly CITY_INPUT_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Checkout',
       metadata: 'sap.m.Input',
@@ -89,7 +89,7 @@ class CheckoutPage extends BasePage {
     },
   };
 
-  static readonly ZIP_CODE_INPUT_SELECTOR = {
+  private static readonly ZIP_CODE_INPUT_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Checkout',
       metadata: 'sap.m.Input',
@@ -97,7 +97,7 @@ class CheckoutPage extends BasePage {
     },
   };
 
-  static readonly COUNTRY_INPUT_SELECTOR = {
+  private static readonly COUNTRY_INPUT_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Checkout',
       metadata: 'sap.m.Input',
@@ -105,7 +105,7 @@ class CheckoutPage extends BasePage {
     },
   };
 
-  static readonly ORDER_SUMMARY_BUTTON_SLECTOR = {
+  private static readonly ORDER_SUMMARY_BUTTON_SLECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Checkout',
       metadata: 'sap.m.Button',

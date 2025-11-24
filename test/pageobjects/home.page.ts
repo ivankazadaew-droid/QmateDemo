@@ -2,9 +2,9 @@ import { ProductCategory } from '../enums/productCategory.enum.ts';
 import BasePage from './base.page.ts';
 
 class HomePage extends BasePage {
-  static readonly URL = '/test-resources/sap/m/demokit/cart/webapp/index.html';
+  private static readonly URL = '/test-resources/sap/m/demokit/cart/webapp/index.html';
 
-  static readonly WELCOME_HEADLINE_SELECTOR = {
+  private static readonly WELCOME_HEADLINE_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Welcome',
       metadata: 'sap.m.Title',
@@ -16,7 +16,7 @@ class HomePage extends BasePage {
     },
   };
 
-  static readonly WELCOME_VIEW_ADD_BUTTON_SELECTOR = {
+  private static readonly WELCOME_VIEW_ADD_BUTTON_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Welcome',
       metadata: 'sap.m.Button',
@@ -24,7 +24,7 @@ class HomePage extends BasePage {
     },
   };
 
-  static readonly PRODUCT_VIEW_ADD_BUTTON_SELECTOR = {
+  private static readonly PRODUCT_VIEW_ADD_BUTTON_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Product',
       metadata: 'sap.m.Button',
@@ -36,28 +36,28 @@ class HomePage extends BasePage {
     },
   };
 
-  static readonly PRODUCT_VIEW_HEADER_SELECTOR = {
+  private static readonly PRODUCT_VIEW_HEADER_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Product',
       metadata: 'sap.m.ObjectHeader',
     },
   };
 
-  static readonly CART_BUTTON_SELECTOR = {
+  private static readonly CART_BUTTON_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Welcome',
       metadata: 'sap.m.ToggleButton',
     },
   };
 
-  static readonly PRODUCT_VIEW_CART_BUTTON_SELECTOR = {
+  private static readonly PRODUCT_VIEW_CART_BUTTON_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Product',
       metadata: 'sap.m.ToggleButton',
     },
   };
 
-  static readonly PROCEED_CART_BUTTON_SELECTOR = {
+  private static readonly PROCEED_CART_BUTTON_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Cart',
       metadata: 'sap.m.Button',
@@ -65,7 +65,7 @@ class HomePage extends BasePage {
     },
   };
 
-  static readonly OUT_OF_STOCK_CONFIRMATION_DIALOG = {
+  private static readonly OUT_OF_STOCK_CONFIRMATION_DIALOG = {
     elementProperties: {
       metadata: 'sap.m.Bar',
     },
@@ -74,35 +74,35 @@ class HomePage extends BasePage {
     },
   };
 
-  static readonly CATEGORIES_LIST_SELECTOR = {
+  private static readonly CATEGORIES_LIST_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Home',
       metadata: 'sap.m.StandardListItem',
     },
   };
 
-  static readonly PRODUCT_LIST_SELECTOR = {
+  private static readonly PRODUCT_LIST_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Category',
       metadata: 'sap.m.ObjectListItem',
     },
   };
 
-  static readonly FOUND_PRODUCTS_LIST_SELECTOR = {
+  private static readonly FOUND_PRODUCTS_LIST_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Home',
       metadata: 'sap.m.ObjectListItem',
     },
   };
 
-  static readonly PRODUCT_STATUS_SELECTOR = {
+  private static readonly PRODUCT_STATUS_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Category',
       metadata: 'sap.m.ObjectStatus',
     },
   };
 
-  static readonly SEARCH_FIELD_SELECTOR = {
+  private static readonly SEARCH_FIELD_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Home',
       metadata: 'sap.m.SearchField',
@@ -110,7 +110,7 @@ class HomePage extends BasePage {
     },
   };
 
-  static readonly FILTER_BUTTON_SELECTOR = {
+  private static readonly FILTER_BUTTON_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Category',
       metadata: 'sap.m.Button',
@@ -118,14 +118,14 @@ class HomePage extends BasePage {
     },
   };
 
-  static readonly CART_PRODUCT_LIST_SELECTOR = {
+  private static readonly CART_PRODUCT_LIST_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Cart',
       metadata: 'sap.m.ObjectListItem',
     },
   };
 
-  static readonly CATEGORIES_BACK_BUTTON_SELECTOR = {
+  private static readonly CATEGORIES_BACK_BUTTON_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Category',
       metadata: 'sap.m.Button',
@@ -133,7 +133,7 @@ class HomePage extends BasePage {
     },
   };
 
-  static readonly RESET_FILTERS_BUTTON_SELECTOR = {
+  private static readonly RESET_FILTERS_BUTTON_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Category',
       metadata: 'sap.m.Button',

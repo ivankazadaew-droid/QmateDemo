@@ -1,7 +1,7 @@
 import BasePage from './base.page.ts';
 
 class OrderSummary extends BasePage {
-  static readonly ITEMS_LIST_SELECTOR = {
+  private static readonly ITEMS_LIST_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Checkout',
       metadata: 'sap.m.ObjectListItem',
@@ -13,18 +13,11 @@ class OrderSummary extends BasePage {
     },
   };
 
-  static readonly SUBMIT_BUTTON_SELECTOR = {
+  private static readonly SUBMIT_BUTTON_SELECTOR = {
     elementProperties: {
       viewName: 'sap.ui.demo.cart.view.Checkout',
       metadata: 'sap.m.Button',
       id: '*submitOrder',
-    },
-  };
-
-  static readonly CONFIRMATION_MODAL_YES_BUTTON = {
-    elementProperties: {
-      metadata: 'sap.m.Button',
-      text: 'Yes',
     },
   };
 
