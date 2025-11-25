@@ -1,3 +1,4 @@
+import { QmateSelector } from 'wdio-qmate-service/modules/ui5/types/ui5.types';
 import { ProductCategory } from '../enums/productCategory.enum.ts';
 import BasePage from './base.page.ts';
 
@@ -156,7 +157,7 @@ class HomePage extends BasePage {
     };
   }
 
-  private getCategorySelector(category: ProductCategory): object {
+  private getCategorySelector(category: ProductCategory): QmateSelector {
     return {
       elementProperties: {
         viewName: 'sap.ui.demo.cart.view.Home',
@@ -166,7 +167,7 @@ class HomePage extends BasePage {
     };
   }
 
-  private getFilterTypeSelectorByName(filterType: string): object {
+  private getFilterTypeSelectorByName(filterType: string): QmateSelector {
     return {
       elementProperties: {
         viewName: 'sap.ui.demo.cart.view.Category',
@@ -176,7 +177,7 @@ class HomePage extends BasePage {
     };
   }
 
-  private getFilterOptionSelectorByName(filterOption: string): object {
+  private getFilterOptionSelectorByName(filterOption: string): QmateSelector {
     return {
       elementProperties: {
         viewName: 'sap.ui.demo.cart.view.Category',
